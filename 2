@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الهولندية البلجيكية — بطاقات وقاموس</title>
+<style>
+:root{--bg:#faf7f2;--card:#fff;--tx:#1f1d1a;--mut:#6d675e;--ac:#c8451f;--ac2:#f3dcd2;--ok:#2e7d4f;--bad:#b3261e;--bd:#e4ddd1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171513;--card:#232019;--tx:#f1ece4;--mut:#a39b8d;--ac:#ef7a55;--ac2:#3b2a22;--ok:#58b07c;--bad:#ef7d74;--bd:#3a352c}}
+:root[data-theme="dark"]{--bg:#171513;--card:#232019;--tx:#f1ece4;--mut:#a39b8d;--ac:#ef7a55;--ac2:#3b2a22;--ok:#58b07c;--bad:#ef7d74;--bd:#3a352c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Tahoma,system-ui,sans-serif;line-height:1.6}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.3rem;margin:4px 0 2px}
+.sub{color:var(--mut);font-size:.9rem;margin:0 0 14px}
+nav{display:flex;gap:6px;margin-bottom:12px}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:8px 14px}
+nav button{flex:1}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chips button{padding:4px 12px;font-size:.85rem;border-radius:99px}
+.stat{display:flex;justify-content:space-between;color:var(--mut);font-size:.85rem;margin-bottom:8px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;min-height:230px;padding:22px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;cursor:pointer}
+.nl{font-size:2rem;font-weight:700;direction:ltr}
+.art{color:var(--ac);font-size:1rem;font-weight:600}
+.hint{color:var(--mut);font-size:.85rem}
+.ar{font-size:1.9rem;font-weight:700}.bigtr{font-size:1.9rem;font-weight:700;margin:8px 0;line-height:1.4}.vf{color:var(--ac);font-size:.95rem;margin-top:4px}
+.en{color:var(--mut);direction:ltr}
+.ex{border-top:1px dashed var(--bd);margin-top:10px;padding-top:10px;width:100%;font-size:.92rem}
+.ex .d{direction:ltr;font-weight:600}
+.row{display:flex;gap:8px;margin-top:12px}
+.row button{flex:1;padding:12px}
+.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+.spk{font-size:1.2rem;padding:2px 10px;border-radius:99px}
+input{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);margin-bottom:10px}
+.item{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.item b{direction:ltr;unicode-bidi:isolate}
+.opt{display:block;width:100%;text-align:right;margin-bottom:8px;padding:12px}
+.opt.right{background:var(--ok);color:#fff}
+.opt.wrong{background:var(--bad);color:#fff}
+.big{font-size:2.2rem;direction:ltr;text-align:center;font-weight:700;margin:14px 0}
+.bar{height:6px;background:var(--bd);border-radius:9px;overflow:hidden;margin-bottom:12px}
+.bar i{display:block;height:100%;background:var(--ac)}
+.tw{overflow-x:auto;margin:6px 0}table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{border:1px solid var(--bd);padding:4px 8px;text-align:right;vertical-align:top}th{background:var(--ac2)}ul{margin:6px 0;padding-inline-start:20px}.small{font-size:.8rem;color:var(--mut);text-align:center;margin-top:16px}
+
+select{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);flex:1}
+textarea{width:100%;min-height:90px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);margin:6px 0}
+.row input{flex:1;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.tile{padding:14px 6px;min-height:56px;text-align:center}
+.tile.sel{background:var(--ac2);border-color:var(--ac)}
+.tile.done{opacity:.35}
+.tile.bad{background:var(--bad);color:#fff}
+.rate button{padding:10px 2px;font-size:.85rem}
+.star{background:none;border:none;font-size:1.2rem;padding:0 6px;cursor:pointer}
+.mini{padding:2px 10px;font-size:.8rem}
+details{margin:8px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>🇧🇪 الهولندية البلجيكية</h1>
+<p class="sub">مجموعات بطاقات بمراجعة متباعدة، وقاموس كامل</p>
+<nav id="nav"></nav>
+<div id="view"></div>
+</main>
+<script>var W=[
+["huis","het","اسم","منزل","house","Ons huis is groot.","منزلنا كبير.","Our house is big."],
+["water","het","اسم","ماء","water","Ik drink veel water.","أشرب كثيرًا من الماء.","I drink a lot of water."],
+["brood","het","اسم","خبز","bread","Ik eet brood met kaas.","آكل الخبز مع الجبن.","I eat bread with cheese."],
+["kaas","de","اسم","جبن","cheese","Deze kaas is lekker.","هذا الجبن لذيذ.","This cheese is tasty."],
+["melk","de","اسم","حليب","milk","Wil je melk in je koffie?","هل تريد حليبًا في قهوتك؟","Do you want milk in your coffee?"],
+["fiets","de","اسم","دراجة","bicycle","Ik ga met de fiets naar school.","أذهب إلى المدرسة بالدراجة.","I go to school by bike."],
+["school","de","اسم","مدرسة","school","De school begint om acht uur.","تبدأ المدرسة في الثامنة.","School starts at eight o'clock."],
+["vriend","de","اسم","صديق","friend","Mijn vriend woont in Gent.","صديقي يسكن في خنت.","My friend lives in Ghent."],
+["werk","het","اسم","عمل","work","Ik heb veel werk.","لدي عمل كثير.","I have a lot of work."],
+["tijd","de","اسم","وقت","time","Ik heb geen tijd.","ليس لدي وقت.","I have no time."],
+["dag","de","اسم","يوم","day","Het is een mooie dag.","إنه يوم جميل.","It is a beautiful day."],
+["boek","het","اسم","كتاب","book","Ik lees een boek.","أقرأ كتابًا.","I am reading a book."],
+["stad","de","اسم","مدينة","city","Gent is een mooie stad.","خنت مدينة جميلة.","Ghent is a beautiful city."],
+["straat","de","اسم","شارع","street","Ik woon in deze straat.","أسكن في هذا الشارع.","I live on this street."],
+["trein","de","اسم","قطار","train","De trein is te laat.","القطار متأخر.","The train is late."],
+["winkel","de","اسم","متجر","shop","De winkel is open.","المتجر مفتوح.","The shop is open."],
+["eten","","فعل","يأكل","to eat","Wij eten om zes uur.","نأكل في السادسة.","We eat at six o'clock.","الماضي التام: gegeten"],
+["drinken","","فعل","يشرب","to drink","Hij drinkt thee.","هو يشرب الشاي.","He drinks tea.","الماضي التام: gedronken"],
+["gaan","","فعل","يذهب","to go","Ik ga naar huis.","أذهب إلى البيت.","I am going home.","الماضي التام: gegaan (zijn)"],
+["komen","","فعل","يأتي","to come","Kom je morgen?","هل ستأتي غدًا؟","Are you coming tomorrow?","الماضي التام: gekomen (zijn)"],
+["willen","","فعل","يريد","to want","Ik wil een koffie.","أريد قهوة.","I would like a coffee.","الماضي التام: gewild"],
+["kunnen","","فعل","يستطيع","can / to be able","Kun je mij helpen?","هل تستطيع مساعدتي؟","Can you help me?","الماضي التام: gekund"],
+["werken","","فعل","يعمل","to work","Zij werkt in Brussel.","هي تعمل في بروكسل.","She works in Brussels.","الماضي التام: gewerkt"],
+["wonen","","فعل","يسكن","to live (reside)","Waar woon je?","أين تسكن؟","Where do you live?","الماضي التام: gewoond"],
+["spreken","","فعل","يتكلم","to speak","Ik spreek een beetje Nederlands.","أتكلم القليل من الهولندية.","I speak a little Dutch.","الماضي التام: gesproken"],
+["leren","","فعل","يتعلّم","to learn","Ik leer elke dag nieuwe woorden.","أتعلم كلمات جديدة كل يوم.","I learn new words every day.","الماضي التام: geleerd"],
+["groot","","صفة","كبير","big","Dat is een grote stad.","تلك مدينة كبيرة.","That is a big city."],
+["klein","","صفة","صغير","small","Het huis is klein.","البيت صغير.","The house is small."],
+["goed","","صفة","جيد","good","Dat is een goed idee.","هذه فكرة جيدة.","That is a good idea."],
+["mooi","","صفة","جميل","beautiful","Wat een mooie dag!","يا له من يوم جميل!","What a beautiful day!"],
+["duur","","صفة","غالٍ","expensive","Dit is te duur.","هذا غالٍ جدًا.","This is too expensive."],
+["goedkoop","","صفة","رخيص","cheap","Die winkel is goedkoop.","ذلك المتجر رخيص.","That shop is cheap."],
+["goeiedag","","عبارة","نهارك سعيد / مرحبًا","good day (greeting)","Goeiedag, mevrouw!","مرحبًا يا سيدتي!","Good day, madam!","شائعة في بلجيكا (الشكل الرسمي: goedendag)"],
+["dank u wel","","عبارة","شكرًا جزيلًا","thank you (formal)","Dank u wel voor uw hulp.","شكرًا جزيلًا على مساعدتك.","Thank you for your help."],
+["alstublieft","","عبارة","من فضلك / تفضّل","please / here you go","Een koffie, alstublieft.","قهوة من فضلك.","A coffee, please."],
+["tot straks","","عبارة","أراك بعد قليل","see you later","Tot straks!","أراك بعد قليل!","See you later!"],
+["Ik begrijp het niet.","","عبارة","لا أفهم.","I don't understand.","Sorry, ik begrijp het niet.","آسف، لا أفهم.","Sorry, I don't understand."],
+["Kunt u dat herhalen?","","عبارة","هل يمكنك تكرار ذلك؟","Can you repeat that?","Kunt u dat herhalen, alstublieft?","هل يمكنك تكرار ذلك من فضلك؟","Can you repeat that, please?"]
+];
+
+var HASC=!!(window.claude&&window.claude.use);
+var GK="AQ.Ab8RN6LUevJxR4aKLI1hELZPApWv2ajvWV7gD_8tRZbgLnbHMA",GM="gemini-3.5-flash-lite";
+var GQ="";
+var DB=null,tab="dict",cur={n:"home"},DIR="nl",SO=false,SAY="",MODE="auto",R=null,busy=false,Q="";
+var IV=[0,1,2,4,8,16,32];
+var V=document.getElementById("view");
+function $(x){return document.getElementById(x)}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function mk(w){return{id:uid(),nl:w[0],art:w[1]||"",ty:w[2]||"",ar:w[3]||"",en:w[4]||"",xn:w[5]||"",xa:w[6]||"",xe:w[7]||"",note:w[8]||"",pa:w[9]||"",pp:w[10]||"",star:0,box:0,due:0}}
+function save(){try{localStorage.setItem("nlsrs2",JSON.stringify(DB))}catch(e){}}
+(function(){
+  try{DB=JSON.parse(localStorage.getItem("nlsrs2")||"null")}catch(e){}
+  if(!DB||!DB.sets){
+    var old=[];try{old=JSON.parse(localStorage.getItem("nlcustom")||"[]")}catch(e){}
+    DB={sets:[{id:uid(),name:"الكلمات",main:1,cards:W.map(mk).concat(old.map(function(w){var c=mk(w);c.star=1;return c}))}]};
+  }
+  migrate();save();
+})();
+function migrate(){
+  var VF=VFM();
+  var def={"الأسماء":"اسم","الأفعال":"فعل","الصفات":"صفة","العبارات":"عبارة","كلماتي":"*"};
+  var main=DB.sets.filter(function(x){return x.main})[0];
+  if(!main){
+    main={id:uid(),name:"الكلمات",main:1,cards:[]};var keep=[],idx={};
+    DB.sets.slice().sort(function(a,b){return (a.name=="كلماتي")-(b.name=="كلماتي")}).forEach(function(st){
+      if(def[st.name]!==undefined){
+        st.cards.forEach(function(c){var k=norm(c.nl),im=st.name=="كلماتي"||st.mine;
+          if(idx[k]){if(im)idx[k].star=1;return}
+          if(!c.ty&&!im)c.ty=def[st.name];if(im)c.star=1;idx[k]=c;main.cards.push(c)});
+      }else keep.push(st);
+    });
+    DB.sets=[main].concat(keep);
+  }
+  DB.sets.forEach(function(st){delete st.mine;st.cards.forEach(function(c){if(c.ty===undefined)c.ty="";if(VF[c.nl]&&!c.pa){c.pa=VF[c.nl][0];c.pp=VF[c.nl][1];if(/^الماضي التام/.test(c.note||""))c.note=""}})});
+}
+function VFM(){return {"eten":["at / aten","heeft gegeten"],"drinken":["dronk / dronken","heeft gedronken"],"gaan":["ging / gingen","is gegaan"],"komen":["kwam / kwamen","is gekomen"],"willen":["wilde / wilden","heeft gewild"],"kunnen":["kon / konden","heeft gekund"],"werken":["werkte / werkten","heeft gewerkt"],"wonen":["woonde / woonden","heeft gewoond"],"spreken":["sprak / spraken","heeft gesproken"],"leren":["leerde / leerden","heeft geleerd"]};}
+function vf(c){var a=[];if(c.pa)a.push('ماضٍ: <span dir="ltr"><b>'+esc(c.pa)+'</b></span>');if(c.pp)a.push('ماضٍ تام: <span dir="ltr"><b>'+esc(c.pp)+'</b></span>');return a.length?'<div class="vf">'+a.join(" · ")+'</div>':""}
+function vfFrom(c){if(!c||!c.rows)return null;var ik=c.rows.filter(function(r){return /\bik\b/.test(r.pron||"")})[0],wi=c.rows.filter(function(r){return /\bwij\b|\bwe\b/.test(r.pron||"")})[0];
+  var pa=ik&&ik.past?ik.past+(wi&&wi.past&&wi.past!=ik.past?" / "+wi.past:""):"";var pp=c.past_part?(c.aux=="zijn"?"is ":c.aux=="hebben"?"heeft ":"")+c.past_part:"";return pa||pp?{pa:pa,pp:pp}:null}
+function MAIN(){return DB.sets.filter(function(x){return x.main})[0]}
+function MINE(){return gs("__mine")}
+var TYO=["اسم","فعل","صفة","ظرف","عبارة","أخرى"],TF="all";
+function tyOf(c){var t=c.ty||"";if(/فعل/.test(t))return"فعل";if(/صفة|نعت/.test(t))return"صفة";if(/ظرف/.test(t))return"ظرف";if(/عبارة|تعبير|جملة/.test(t))return"عبارة";if(/اسم/.test(t))return"اسم";return"أخرى"}
+function tyOpts(v){return TYO.map(function(t){return '<option value="'+t+'"'+(t==v?" selected":"")+'>'+t+'</option>'}).join("")}
+function homeSet(c){return DB.sets.filter(function(x){return x.cards.indexOf(c)>-1})[0]}
+function typeChips(st){
+  var n={};st.cards.forEach(function(c){var t=tyOf(c);n[t]=(n[t]||0)+1});
+  if(TF!="all"&&!n[TF])TF="all";
+  return '<div class="chips"><button class="'+(TF=="all"?"on":"")+'" data-a="tf" data-v="all">كل الأنواع ('+st.cards.length+')</button>'+TYO.filter(function(t){return n[t]}).map(function(t){return '<button class="'+(TF==t?"on":"")+'" data-a="tf" data-v="'+t+'">'+t+' ('+n[t]+')</button>'}).join("")+'</div>';
+}
+var FL="all";
+function statusOf(c){return c.box>=4?"done":(c.box==0&&c.due==0)?"new":"learn"}
+function gs(id){if(id=="__mine")return{id:"__mine",name:"كلماتي",mine:1,cards:allCards().filter(function(c){return c.star})};return DB.sets.filter(function(s){return s.id==id})[0]}
+function allCards(){var a=[];DB.sets.forEach(function(s){a=a.concat(s.cards)});return a}
+function speak(t){try{var u=new SpeechSynthesisUtterance(t);u.lang="nl-BE";speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function rate(c,q){var n=Date.now();
+  if(q==0){c.box=0;c.due=n+6e4}
+  else if(q==1){c.due=n+Math.max(6e5,IV[c.box]*432e5)}
+  else{c.box=Math.min(6,c.box+(q==3?2:1));c.due=n+IV[c.box]*864e5}
+  save()}
+function stats(s){var n=Date.now();return{t:s.cards.length,d:s.cards.filter(function(c){return c.due<=n}).length,m:s.cards.filter(function(c){return c.box>=4}).length}}
+function pool(s){return s.cards.filter(function(c){return (!SO||c.star)&&(TF=="all"||tyOf(c)==TF)})}
+function nm(c){return (c.art?'<span class="art">'+esc(c.art)+'</span> ':'')+'<span class="nl">'+esc(c.nl)+'</span>'}
+function front(c,d){SAY=c.nl;return d=="nl"?'<div>'+nm(c)+'</div><button class="spk" data-a="say">🔊</button>'+vf(c):'<div class="ar">'+esc(c.ar)+'</div><div class="en">'+esc(c.en)+'</div>'}
+function back(c,d){var h=d=="nl"?'<div class="ar">'+esc(c.ar)+'</div><div class="en">'+esc(c.en)+'</div>':'<div>'+nm(c)+'</div><button class="spk" data-a="say">🔊</button>'+vf(c);
+  if(c.note)h+='<div class="hint">'+esc(c.note)+'</div>';
+  if(c.xn)h+='<div class="ex"><div class="d">'+esc(c.xn)+'</div><div>'+esc(c.xa)+'</div><div class="en">'+esc(c.xe)+'</div></div>';
+  return h}
+function dirOf(){return DIR=="mix"?(Math.random()<.5?"nl":"ar"):DIR}
+function nav(){
+  var T=[["dict","📘 القاموس"],["sets","📚 المجموعات"],["mine","⭐ كلماتي"],["add","➕ إضافة"]];
+  $("nav").innerHTML=T.map(function(t){return '<button class="'+(tab==t[0]?"on":"")+'" data-t="'+t[0]+'">'+t[1]+'</button>'}).join("");
+}
+function render(){nav();
+  if(tab=="mine"&&(cur.n=="home"||!cur.set))cur={n:"set",set:MINE().id};
+  if(tab=="dict"){search();return}
+  if(tab=="add"){addTab();return}
+  var f={home:home,set:setPage,srs:srs,browse:browse,mc:mc,type:typ,match:match,io:ioPage}[cur.n];f()}
+function back2(){return '<p><button data-a="'+(cur.set?"open":"home")+'" data-s="'+(cur.set||"")+'">↩ رجوع</button></p>'}
+function home(){
+  var h='<div class="row"><input id="nsn" placeholder="اسم مجموعة جديدة"><button class="on" data-a="newset" style="flex:0 0 auto">إنشاء</button></div><div style="height:10px"></div>';
+  DB.sets.forEach(function(s){var t=stats(s);
+    h+='<div class="item"><b>'+esc(s.name)+'</b><div class="hint">'+t.t+' بطاقة · '+t.d+' للمراجعة · '+t.m+' متقنة</div><div class="bar"><i style="width:'+(t.t?t.m/t.t*100:0)+'%"></i></div><div class="row"><button class="on" data-a="open" data-s="'+s.id+'">فتح</button>'+(t.d?'<button class="ok" data-a="srsgo" data-s="'+s.id+'">راجع الآن ('+t.d+')</button>':'')+'</div></div>'});
+  h+='<div class="row"><button data-a="io">💾 نسخ احتياطي واستيراد</button></div>';
+  V.innerHTML=h;
+}
+var rowHtml=function(c){return '<div style="border-top:1px solid var(--bd);padding:6px 0;display:flex;gap:6px;align-items:center"><button class="star" data-a="star" data-c="'+c.id+'">'+(c.star?"★":"☆")+'</button><div style="flex:1"><b dir="ltr">'+esc((c.art?c.art+" ":"")+c.nl)+'</b> — '+esc(c.ar)+' <span class="en">('+esc(c.en)+')</span> <span class="hint">· '+{"new":"جديدة","learn":"قيد الحفظ","done":"محفوظة"}[statusOf(c)]+'</span>'+vf(c)+'</div><button class="mini" data-a="edit" data-c="'+c.id+'">✏️</button><button class="mini" data-a="del" data-c="'+c.id+'">'+(cur.dc==c.id?"تأكيد؟":"🗑")+'</button></div>'};
+function listHtml(st){
+  return TYO.map(function(t){
+    var it=st.cards.filter(function(c){return tyOf(c)==t&&(TF=="all"||TF==t)&&(FL=="all"||statusOf(c)==FL)});
+    if(!it.length)return "";
+    return '<div class="hint" style="margin-top:10px"><b>'+t+' ('+it.length+')</b></div>'+it.map(rowHtml).join("");
+  }).join("")||'<div class="hint">لا توجد بطاقات.</div>';
+}
+function setPage(){
+  var s=gs(cur.set);if(!s){cur={n:"home"};return home()}
+  var t=stats(s),ec=cur.ed&&s.cards.filter(function(c){return c.id==cur.ed})[0];
+  var h=(tab=="mine"?'<div class="hint" style="margin-bottom:8px">الكلمات المميّزة بنجمة ★ من كل المجموعات. ضع نجمة على أي كلمة لتظهر هنا للحفظ والمراجعة.</div>':'<p><button data-a="home">↩ المجموعات</button></p>')+'<div class="item"><b style="font-size:1.1rem">'+(s.mine?"⭐ ":"")+esc(s.name)+'</b><div class="hint">'+t.t+' بطاقة · '+t.d+' مستحقة للمراجعة · '+t.m+' متقنة</div><div class="bar"><i style="width:'+(t.t?t.m/t.t*100:0)+'%"></i></div></div>';
+  h+=typeChips(s);
+  h+='<div class="chips">'+[["nl","🇧🇪 ← 🇸🇦"],["ar","🇸🇦 ← 🇧🇪"],["mix","مختلط"]].map(function(d){return '<button class="'+(DIR==d[0]?"on":"")+'" data-a="dir" data-v="'+d[0]+'">'+d[1]+'</button>'}).join("")+'<button class="'+(SO?"on":"")+'" data-a="so">★ المميّزة فقط</button></div>';
+  h+='<div class="grid"><button class="ok" data-a="srsgo" data-s="'+s.id+'">🃏 مراجعة متباعدة ('+t.d+')</button><button data-a="go" data-m="browse">🔀 تقليب حر</button><button data-a="go" data-m="type">⌨️ كتابة</button><button data-a="go" data-m="mc">📝 اختبار</button><button data-a="go" data-m="match">🧩 مطابقة</button><button data-a="reset">'+(cur.rs?"اضغط للتأكيد":"↺ تصفير التقدّم")+'</button></div>';
+  if(cur.msg)h+='<div class="item">'+cur.msg+'</div>';
+  if(ec)h+='<div class="item"><b>✏️ تعديل بطاقة</b><input id="f_nl" placeholder="الهولندية (مثل: huis)" dir="ltr"><div class="row"><input id="f_art" placeholder="de / het" dir="ltr"><input id="f_ar" placeholder="العربية"></div><input id="f_en" placeholder="English" dir="ltr"><input id="f_xn" placeholder="مثال هولندي (اختياري)" dir="ltr"><input id="f_xa" placeholder="ترجمة المثال بالعربية"><input id="f_xe" placeholder="ترجمة المثال بالإنجليزية" dir="ltr"><div class="row"><select id="f_ty">'+tyOpts(ec?tyOf(ec):"")+'</select><select id="f_gp">'+DB.sets.map(function(x){return '<option value="'+x.id+'"'+(ec&&homeSet(ec)===x?" selected":"")+'>'+esc(x.name)+'</option>'}).join("")+'</select></div><div class="row"><input id="f_pa" placeholder="الماضي (للأفعال): at / aten" dir="ltr"><input id="f_pp" placeholder="الماضي التام: heeft gegeten" dir="ltr"></div><div class="row"><button class="ok" data-a="savecard">'+(ec?"حفظ التعديل":"إضافة")+'</button>'+(ec?'<button data-a="canc">إلغاء</button>':'')+'</div></div>';
+  h+='<div class="row"><button data-a="toadd">➕ إضافة بطاقات لهذه المجموعة</button></div>';
+  h+='<div class="item"><b>🗂 البطاقات</b><div class="chips" style="margin-top:8px">'+[["all","الكل"],["new","جديدة"],["learn","قيد الحفظ"],["done","محفوظة"]].map(function(f){return '<button class="'+(FL==f[0]?"on":"")+'" data-a="fl" data-v="'+f[0]+'">'+f[1]+'</button>'}).join("")+'</div>'+listHtml(s)+'</div>';
+  if(!s.mine&&!s.main)h+='<div class="item"><div class="row"><input id="rn" value="'+esc(s.name)+'"><button data-a="rename" style="flex:0 0 auto">إعادة تسمية</button></div><div class="row"><button class="no" data-a="delset">'+(cur.ds?"اضغط للتأكيد":"🗑 حذف المجموعة")+'</button></div></div>';
+  V.innerHTML=h;
+  if(ec){$("f_nl").value=ec.nl;$("f_art").value=ec.art;$("f_ar").value=ec.ar;$("f_en").value=ec.en;$("f_xn").value=ec.xn;$("f_xa").value=ec.xa;$("f_xe").value=ec.xe;$("f_pa").value=ec.pa||"";$("f_pp").value=ec.pp||""}
+}
+function endScreen(t,sub){V.innerHTML=back2()+'<div class="item" style="text-align:center"><div style="font-size:2rem">🎉</div><b>'+t+'</b><div class="hint">'+(sub||"")+'</div></div>'}
+function start(m,set){
+  var s=gs(set),p=pool(s);cur={n:m,set:set};
+  if(m=="srs"){var n=Date.now();p=p.filter(function(c){return c.due<=n})}
+  if(!p.length){cur={n:"set",set:set,msg:m=="srs"?"لا توجد بطاقات مستحقة للمراجعة الآن 👌":"لا توجد بطاقات مناسبة (تحقق من خيار ★)."};return render()}
+  if(m=="match"&&p.length<2){cur={n:"set",set:set,msg:"تحتاج بطاقتين على الأقل."};return render()}
+  p=shuffle(p);cur.q=p;cur.i=0;cur.flip=false;cur.total=p.length;cur.s=0;cur.d=dirOf();
+  if(m=="mc")mkq();
+  if(m=="match"){var c6=p.slice(0,6),tl=[];c6.forEach(function(c){tl.push({k:c.id,t:"nl",x:(c.art?c.art+" ":"")+c.nl},{k:c.id,t:"ar",x:c.ar})});cur.tiles=shuffle(tl);cur.sel=null;cur.ok={};cur.t0=Date.now();cur.bad=null}
+  render();
+}
+function srs(){
+  var c=cur.q[0];if(!c)return endScreen("انتهت المراجعة","أنجزت "+cur.total+" بطاقة");
+  var h=back2()+'<div class="stat"><span>المتبقي: '+cur.q.length+'</span><span>المستوى: '+(c.box+1)+'/7</span></div><div class="bar"><i style="width:'+((cur.total-cur.q.length)/cur.total*100)+'%"></i></div>';
+  h+='<div class="card" data-a="flip">'+(cur.flip?front(c,cur.d)+'<hr style="width:100%;border:0;border-top:1px dashed var(--bd)">'+back(c,cur.d):front(c,cur.d)+'<span class="hint">اضغط لإظهار الإجابة</span>')+'<button class="star" data-a="star" data-c="'+c.id+'">'+(c.star?"★":"☆")+'</button></div>';
+  if(cur.flip)h+='<div class="row rate"><button class="no" data-a="rate" data-q="0">مرة أخرى</button><button data-a="rate" data-q="1">صعبة</button><button class="ok" data-a="rate" data-q="2">جيدة</button><button class="on" data-a="rate" data-q="3">سهلة</button></div>';
+  V.innerHTML=h;
+}
+function browse(){
+  var c=cur.q[cur.i];
+  var h=back2()+'<div class="stat"><span>'+(cur.i+1)+' / '+cur.q.length+'</span></div><div class="card" data-a="flip">'+(cur.flip?back(c,cur.d):front(c,cur.d))+'<button class="star" data-a="star" data-c="'+c.id+'">'+(c.star?"★":"☆")+'</button></div><div class="row"><button data-a="prev">→ السابقة</button><button class="on" data-a="next">التالية ←</button></div>';
+  V.innerHTML=h;
+}
+function mkq(){
+  var c=cur.q[cur.i],p=gs(cur.set).cards.filter(function(x){return x!==c});if(p.length<3)p=allCards().filter(function(x){return x!==c});
+  cur.opts=shuffle(shuffle(p).slice(0,3).concat([c]));cur.d=dirOf();cur.ans=null;
+}
+function mc(){
+  var c=cur.q[cur.i];if(!c)return endScreen("النتيجة: "+cur.s+" / "+cur.total,cur.s==cur.total?"ممتاز!":"راجع الأخطاء وحاول مجددًا");
+  var h=back2()+'<div class="stat"><span>'+(cur.i+1)+' / '+cur.total+'</span><span>الصحيح: '+cur.s+'</span></div><div class="card" style="min-height:130px">'+front(c,cur.d)+'</div><div style="height:10px"></div>';
+  h+=cur.opts.map(function(o,i){var tx=cur.d=="nl"?esc(o.ar):esc((o.art?o.art+" ":"")+o.nl),k="";
+    if(cur.ans!==null){if(o===c)k=" right";else if(i==cur.ans)k=" wrong"}
+    return '<button class="opt'+k+'" data-a="pick" data-i="'+i+'">'+tx+'</button>'}).join("");
+  if(cur.ans!==null)h+='<div class="row"><button class="on" data-a="next">التالي ←</button></div>';
+  V.innerHTML=h;
+}
+function norm(x){return String(x||"").toLowerCase().trim().replace(/^(de|het|een)\s+/,"").replace(/\s+/g," ")}
+function typ(){
+  var c=cur.q[cur.i];if(!c)return endScreen("النتيجة: "+cur.s+" / "+cur.total);
+  var h=back2()+'<div class="stat"><span>'+(cur.i+1)+' / '+cur.total+'</span><span>الصحيح: '+cur.s+'</span></div><div class="card" style="min-height:130px"><div class="ar">'+esc(c.ar)+'</div><div class="en">'+esc(c.en)+'</div></div><div style="height:10px"></div>';
+  if(cur.res===undefined)h+='<input id="ti" dir="ltr" placeholder="اكتب الكلمة بالهولندية" autocomplete="off"><div class="row"><button class="on" data-a="check">تحقق</button><button data-a="skip">لا أعرف</button></div>';
+  else h+='<div class="item" style="border-color:var(--'+(cur.res?"ok":"bad")+')">'+(cur.res?"✓ صحيح":"✗ الصواب:")+' <b dir="ltr">'+esc((c.art?c.art+" ":"")+c.nl)+'</b></div><div class="row"><button class="on" data-a="next">التالي ←</button></div>';
+  V.innerHTML=h;var i=$("ti");if(i){i.focus();i.onkeydown=function(e){if(e.key=="Enter")typeCheck()}}
+}
+function typeCheck(skip){var c=cur.q[cur.i],i=$("ti");cur.res=!skip&&i&&norm(i.value)==norm(c.nl);if(cur.res)cur.s++;rate(c,cur.res?2:0);typ()}
+function match(){
+  var left=cur.tiles.filter(function(t){return !cur.ok[t.k]}).length;
+  var h=back2();
+  if(!left){var sec=Math.round((Date.now()-cur.t0)/1000);return endScreen("أنهيتها في "+sec+" ثانية","")}
+  h+='<div class="grid">'+cur.tiles.map(function(t,i){var k=cur.ok[t.k]?" done":cur.bad&&(cur.bad[0]==i||cur.bad[1]==i)?" bad":cur.sel===i?" sel":"";
+    return '<button class="tile'+k+'" data-a="tile" data-i="'+i+'" dir="'+(t.t=="nl"?"ltr":"rtl")+'">'+esc(t.x)+'</button>'}).join("")+'</div>';
+  V.innerHTML=h;
+}
+function ioPage(){
+  V.innerHTML='<p><button data-a="home">↩ المجموعات</button></p><div class="item"><b>💾 نسخة احتياطية</b><div class="hint">انسخ هذا النص واحفظه. التقدّم يُحفظ في متصفحك فقط، لذا النسخة تحميك من الفقدان وتنقل بطاقاتك لجهاز آخر.</div><textarea id="exp" dir="ltr" readonly>'+esc(JSON.stringify(DB))+'</textarea></div><div class="item"><b>⬆ استعادة</b><div class="hint">يستبدل كل بطاقاتك الحالية.</div><textarea id="imp" dir="ltr" placeholder="الصق النسخة هنا"></textarea><button data-a="restore">'+(cur.rs?"اضغط للتأكيد":"استعادة")+'</button><div id="iom" class="hint"></div></div>';
+}
+var AS=null;
+function parseBulk(txt,s){var n=0;txt.split(/\r?\n/).forEach(function(l){var p=l.split(/[;\t]/).map(function(x){return x.trim()});if(p.length<2||!p[0]||!p[1])return;var m=p[0].match(/^(de|het)\s+(.+)/i);s.cards.push(mk([m?m[2]:p[0],m?m[1].toLowerCase():"",p[3]||"",p[1],p[2]||"","","","",""]));n++});return n}
+function addTab(){
+  if(!AS||AS=="__mine"||!gs(AS))AS=MAIN().id;
+  V.innerHTML='<div class="item"><b>➕ إضافة بطاقة</b><div class="hint">اختر المجموعة التي ستُضاف إليها البطاقة.</div><select id="as" style="width:100%;margin:8px 0">'+DB.sets.map(function(s){return '<option value="'+s.id+'"'+(s.id==AS?" selected":"")+'>'+esc(s.name)+'</option>'}).join("")+'</select><input id="a_nl" placeholder="الهولندية (مثل: huis)" dir="ltr"><div class="row"><input id="a_art" placeholder="de / het" dir="ltr"><input id="a_ar" placeholder="العربية"></div><input id="a_en" placeholder="English" dir="ltr"><select id="a_ty" style="width:100%;margin-bottom:8px"><option value="">نوع الكلمة</option>'+tyOpts("")+'</select><div class="row"><input id="a_pa" placeholder="الماضي (للأفعال): at / aten" dir="ltr"><input id="a_pp" placeholder="الماضي التام: heeft gegeten" dir="ltr"></div><label class="hint"><input type="checkbox" id="a_st" style="width:auto;margin:0 4px"> ⭐ أضفها إلى كلماتي</label><input id="a_xn" placeholder="مثال هولندي (اختياري)" dir="ltr"><input id="a_xa" placeholder="ترجمة المثال بالعربية"><input id="a_xe" placeholder="ترجمة المثال بالإنجليزية" dir="ltr"><div class="row"><button class="ok" data-a="addsave">إضافة</button></div><div class="hint" style="margin-top:6px">'+(cur.am||"")+'</div></div><details class="item"><summary>استيراد جماعي</summary><div class="hint">سطر لكل بطاقة: هولندي ; عربي ; English (يمكن كتابة de/het قبل الكلمة)</div><textarea id="ab" dir="ltr" placeholder="het huis;منزل;house"></textarea><button data-a="addbulk">استيراد</button></details>';
+  $("as").onchange=function(){AS=this.value};
+}
+function setSel(nb){return '<div class="row"><select id="tgt">'+DB.sets.map(function(s){return '<option value="'+s.id+'"'+(s.main?" selected":"")+'>'+esc(s.name)+'</option>'}).join("")+'</select>'+(nb?"":'<button class="ok" data-a="addw">➕ أضف إلى المجموعة</button>')+'</div><label class="hint"><input type="checkbox" id="d_st" checked style="width:auto;margin:0 4px"> ⭐ أضفها أيضًا إلى كلماتي</label>'}
+var R=null,busy=false,MODE="auto",Q="";
+var SYS="You are a specialist dictionary and tutor for BELGIAN Dutch (Flanders usage is the primary reference) for Arabic speakers. Mention Netherlands Dutch only when the difference matters and is certain. NEVER guess or invent meanings, forms, IPA, CEFR levels, frequency or regional facts: if unsure, use empty string/array/null. CEFR is approximate. freq is an integer 1-5 only if well-founded, else 0. Never call it a separate 'Flemish language'. Verbs: say whether separable (scheidbaar), inseparable or irregular only if sure; give hebben/zijn. All explanations in Arabic; examples in natural Belgian Dutch, every Dutch example with Arabic AND English translation. If the input has a spelling/grammar error, put the corrected form in 'correction' and use only the correct form afterwards. Reply with ONLY one JSON object, no markdown. Choose 'kind' by MODE and input: MODE=tr -> {\"kind\":\"tr\",\"ar\":\"\",\"en\":\"\"} (translation only). MODE=cj -> {\"kind\":\"cj\",\"nl\":\"\",\"conj\":CONJ}. MODE=cmp -> input is two items separated by | : {\"kind\":\"cmp\",\"items\":[ITEM,ITEM],\"diff\":\"short Arabic key difference\",\"regional\":{\"be\":{\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"use\":\"\",\"freq\":\"\",\"ex\":EX},\"nl\":{same}}|null}. MODE=auto: a single word/phrase -> {\"kind\":\"word\",\"correction\":\"\",\"nl\":\"\",\"article\":\"de|het|\",\"type\":\"Arabic grammatical type\",\"vtype\":\"\",\"level\":\"\",\"freq\":0,\"ipa\":\"\",\"arpron\":\"approx Arabic pronunciation\",\"region\":\"BE|NL|\",\"meanings\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\"}],\"conj\":CONJ|null,\"noun\":{\"sg\":\"\",\"pl\":\"\",\"dim\":\"\"}|null,\"synonyms\":[{\"kind\":\"مرادف|ضد\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"freq\":0,\"ipa\":\"\"}],\"family\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\"}] (only true derivations),\"related\":[5-7 common related words {\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\"}],\"constructions\":[{\"form\":\"fixed preposition/pattern\",\"use\":\"\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}],\"examples\":[EX x3],\"note\":\"\",\"mistakes\":[\"\"]}; a sentence or text -> {\"kind\":\"text\",\"correction\":\"\",\"ar\":\"\",\"en\":\"\",\"vocab\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\",\"level\":\"\",\"forms\":\"\"}],\"idioms\":[{\"nl\":\"\",\"ar\":\"\",\"use\":\"\",\"ex\":EX}],\"grammar\":[{\"rule\":\"\",\"why\":\"\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}],\"summary\":\"\"}. EX={\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}. CONJ={\"aux\":\"hebben|zijn\",\"rows\":[{\"pron\":\"ik\",\"present\":\"\",\"past\":\"\",\"perfect\":\"\",\"imperative\":\"\"}] (merge pronouns with identical forms: ik; jij/je/u; hij/zij/het; wij/we; jullie; zij/ze),\"pres_part\":\"\",\"past_part\":\"\"}. ITEM={\"nl\":\"\",\"type\":\"\",\"article\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\",\"meaning\":\"\",\"use\":\"\",\"formality\":\"\",\"freq\":\"\",\"level\":\"\",\"ex\":EX}.";
+SYS+=' MODE=a2n -> the input is ARABIC or English: give the 3-5 most natural Belgian Dutch equivalents ranked by naturalness in Belgium: {"kind":"a2n","results":[{"nl":"","article":"de|het|","type":"Arabic grammatical type","region":"BE|NL|","ipa":"","ar":"","en":"","note":"short Arabic note on usage and the difference between the options","pa":"verbs only: simple past e.g. at / aten","pp":"verbs only: perfect e.g. heeft gegeten","ex":EX}],"tip":""}. If the input is a full sentence return one result whose nl is the Dutch translation (type: جملة, no article). Never invent; return fewer results if unsure.';
+SYS+=' SRC states the input language (nl, ar or en); always translate into the other two languages. For MODE=a2n set "src" at the top level to the input language and give BOTH ar and en for every Dutch equivalent (ar = Arabic translation of that Dutch word, en = English translation of that Dutch word). For MODE=tr return {"kind":"tr","nl":"","ar":"","en":""} with all three filled (the source language is the input itself; fix obvious typos).';
+SYS+=' STRICT LANGUAGE RULE: treat the input ONLY as the SRC language, even when the same spelling is also a word in another language (for example English "kind" is not Dutch "kind", Dutch "ramp" is not English "ramp"). If the input has one obvious typo, fix it (put the fixed form in "correction") and answer for the fixed form. If it is not a valid word or phrase of SRC and has no single obvious fix (nonexistent word, a word of another language, or too ambiguous), do NOT guess: return {"kind":"nf","detected":"nl|en|ar|","suggestions":[up to 6 real words of the SRC language that are spelled similarly or are the most likely intended words: {"w":"","ar":"","en":"","note":"very short Arabic note"}]}, where detected is the language the input really looks like (empty if unknown). Suggestions must be real words in SRC only.';
+SYS+=' GATE: every response of any kind MUST include the fields "inlang" (the language the input really is: nl, en, ar or unknown) and "valid" (true only if the input is a real word or phrase in SRC). If valid is false return kind nf and NEVER explain the input as if it belonged to SRC. Never invent regional or dialect claims and never mention other countries or languages (Dutch in Belgium is not Austrian German); state a regional difference only when you are certain. For nf also include "other":{"lang":"nl|en|ar","ar":"","en":"","note":""} giving the meaning of the input in the language it really belongs to (omit when unknown). When valid is true but the same spelling is also a real word with a different meaning in the other of nl/en, add "homograph":{"lang":"nl|en","ar":"","en":""}.';
+function E(x){return esc(x==null?"":String(x))}
+function N(x){return '<span dir="ltr">'+E(x)+'</span>'}
+function T(h,rows){rows=rows.filter(function(r){return r.some(function(c){return c})});return rows.length?'<div class="tw"><table><tr>'+h.map(function(x){return '<th>'+x+'</th>'}).join("")+'</tr>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>'}).join("")+'</tr>'}).join("")+'</table></div>':""}
+function S(t,h){return h?'<div class="item"><b>'+t+'</b>'+h+'</div>':""}
+function st(n){n=+n||0;return n>0&&n<6?'☆'.repeat(5-n)+'★'.repeat(n):""}
+function exT(a){return T(["🇧🇪 الهولندية","🇸🇦 العربية","🇬🇧 English"],(a||[]).map(function(x){return [N(x.nl),E(x.ar),N(x.en)]}))}
+function conjT(c){if(!c||!c.rows||!c.rows.length)return "";
+  return T(["الضمير 👤","المضارع","الماضي","الماضي التام","الأمر"],c.rows.map(function(r){return [N(r.pron),N(r.present),N(r.past),N(r.perfect),N(r.imperative)]}))+'<div class="hint">'+[c.aux?"المساعد: "+E(c.aux):"",c.pres_part?"اسم الفاعل: "+N(c.pres_part):"",c.past_part?"اسم المفعول: "+N(c.past_part):""].filter(Boolean).join(" · ")+'</div>'}
+function show(r){
+  var h="",k=r.kind;
+  if(r.correction)h+='<div class="item" style="border-color:var(--bad)">⚠️ الصياغة الصحيحة: <b dir="ltr">'+E(r.correction)+'</b></div>';
+  if(k!="nf"&&r.homograph&&(r.homograph.ar||r.homograph.en))h+='<div class="item" style="border-color:var(--ac)">⚠️ انتبه: الكتابة نفسها كلمة في اللغة '+({nl:"الهولندية",en:"الإنجليزية"}[r.homograph.lang]||"أخرى")+' بمعنى مختلف: <b dir="auto">'+E([r.homograph.ar,r.homograph.en].filter(Boolean).join(" · "))+'</b></div>';
+  if(k=="tr")h+='<div class="item">'+(r.nl?'<div class="bigtr" dir="ltr">🇧🇪 '+E(r.nl)+'</div>':'')+'<div class="bigtr">🇸🇦 '+E(r.ar)+'</div><div class="bigtr" dir="ltr" style="font-size:1.5rem">🇬🇧 '+E(r.en)+'</div></div>';
+  else if(k=="nf"){
+    var LN={nl:"الهولندية",en:"الإنجليزية",ar:"العربية"},sg=r.suggestions||[];
+    h+='<div class="item" style="border-color:var(--bad)">⚠️ لم أجد «<b dir="auto">'+E(Q)+'</b>» ككلمة صحيحة في اللغة <b>'+LN[LANG]+'</b>.'+(r.detected&&r.detected!=LANG&&LN[r.detected]?'<div style="margin-top:6px">تبدو كلمة <b>'+LN[r.detected]+'</b>'+(r.other&&(r.other.ar||r.other.en)?' ومعناها: <b dir="auto">'+E([r.other.ar,r.other.en].filter(Boolean).join(" · "))+'</b>':'')+'.'+(r.other&&r.other.note?' <span class="hint">'+E(r.other.note)+'</span>':'')+'</div><div class="row"><button class="ok" data-a="sw" data-v="'+E(r.detected)+'">بدّل اللغة إلى '+LN[r.detected]+' وابحث</button></div>':'')+'</div>';
+    if(sg.length)h+='<div class="item"><b>💡 هل تقصد:</b>'+sg.map(function(x,i){return '<div style="border-top:1px solid var(--bd);padding:8px 0;display:flex;gap:8px;align-items:center"><button data-a="sug" data-i="'+i+'" style="flex:0 0 auto" dir="auto">'+E(x.w)+'</button><div style="flex:1">'+E([x.ar,x.en].filter(Boolean).join(" · "))+(x.note?'<div class="hint">'+E(x.note)+'</div>':'')+'</div></div>'}).join("")+'</div>';
+  }
+  else if(k=="a2n"){
+    h+=(r.results||[]).map(function(x,i){return '<div class="item"><div>'+(x.article?'<span class="art">'+E(x.article)+'</span> ':'')+'<span class="nl" style="font-size:1.6rem">'+E(x.nl)+'</span> <button class="spk" data-a="sayr" data-i="'+i+'">🔊</button></div><div class="hint">'+E([x.type,x.region].filter(Boolean).join(" · "))+(x.ipa?' · <span dir="ltr">/'+E(String(x.ipa).replace(/\//g,""))+'/</span>':'')+'</div>'+(r.src=="en"?'<div class="bigtr">'+E(x.ar)+'</div><div class="en">'+E(x.en)+'</div>':'<div class="bigtr" dir="ltr">'+E(x.en)+'</div><div>'+E(x.ar)+'</div>')+vf(x)+(x.note?'<div class="hint">📌 '+E(x.note)+'</div>':'')+(x.ex?exT([x.ex]):'')+'<div class="row"><button data-a="full" data-i="'+i+'">📖 شرح كامل</button><button class="ok" data-a="addr" data-i="'+i+'">➕ أضف</button></div></div>'}).join("");
+    if(r.tip)h+='<div class="item">📌 '+E(r.tip)+'</div>';
+    h+=setSel(true);
+  }
+  else if(k=="cj")h+=S("🔄 تصريف "+N(r.nl),conjT(r.conj));
+  else if(k=="cmp"){
+    var it=r.items||[],a=it[0]||{},b=it[1]||{},rows=[["الكلمة",N(a.nl),N(b.nl)],["النوع",E(a.type),E(b.type)],["de / het",E(a.article),E(b.article)],["🇸🇦 العربية",E(a.ar),E(b.ar)],["🇬🇧 English",N(a.en),N(b.en)],["النطق",N(a.ipa),N(b.ipa)],["المعنى الأساسي",E(a.meaning),E(b.meaning)],["الاستخدام",E(a.use),E(b.use)],["درجة الرسمية",E(a.formality),E(b.formality)],["الشيوع في 🇧🇪",E(a.freq),E(b.freq)],["المستوى",E(a.level),E(b.level)],["المثال",a.ex?N(a.ex.nl)+'<br>'+E(a.ex.ar)+'<br>'+N(a.ex.en):"",b.ex?N(b.ex.nl)+'<br>'+E(b.ex.ar)+'<br>'+N(b.ex.en):""]];
+    h+=S("↔️ المقارنة",T(["العنصر","الأولى","الثانية"],rows));
+    if(r.diff)h+='<div class="item">🎯 <b>الفرق الأساسي:</b> '+E(r.diff)+'</div>';
+    var g=r.regional;if(g&&g.be&&g.nl){function f(o){return o.ex?N(o.ex.nl)+'<br>'+E(o.ex.ar)+'<br>'+N(o.ex.en):""}
+      h+=S("🇧🇪 مقابل 🇳🇱",T(["العنصر","🇧🇪 BE","🇳🇱 NL"],[["الكلمة",N(g.be.nl),N(g.nl.nl)],["🇸🇦 العربية",E(g.be.ar),E(g.nl.ar)],["🇬🇧 English",N(g.be.en),N(g.nl.en)],["الاستخدام",E(g.be.use),E(g.nl.use)],["الشيوع",E(g.be.freq),E(g.nl.freq)],["المثال",f(g.be),f(g.nl)]]))}
+  }
+  else if(k=="text"){
+    h+='<div class="item"><b>1️⃣ 🇸🇦 الترجمة</b><div>'+E(r.ar)+'</div><b>2️⃣ 🇬🇧 English</b><div class="en">'+E(r.en)+'</div></div>';
+    h+=S("3️⃣ 📚 المفردات المهمة",T(["الكلمة","النوع","🇸🇦 المعنى","🇬🇧 English","المستوى","التصريف"],(r.vocab||[]).map(function(v){return [N(v.nl),E(v.type),E(v.ar),N(v.en),E(v.level),N(v.forms)]})));
+    h+=S("4️⃣ 💬 التعابير",(r.idioms||[]).map(function(i){return '<div class="ex"><div class="d">'+E(i.nl)+'</div><div>'+E(i.ar)+(i.use?' — '+E(i.use):'')+'</div></div>'+(i.ex?exT([i.ex]):"")}).join(""));
+    h+=S("5️⃣ 📌 القواعد النحوية",T(["القاعدة","سبب الاستخدام","المثال"],(r.grammar||[]).map(function(g){return [E(g.rule),E(g.why),N(g.nl)+'<br>'+E(g.ar)+'<br>'+N(g.en)]})));
+    if(r.summary)h+='<div class="item">🎯 <b>الملخص:</b> '+E(r.summary)+'</div>';
+  }
+  else{
+    var fl=r.region=="BE"?" 🇧🇪":r.region=="NL"?" 🇳🇱":"";
+    h+='<div class="item"><div>📚 '+(r.article?'<span class="art">'+E(r.article)+'</span> ':'')+'<span class="nl" style="font-size:1.6rem">'+E(r.nl)+'</span>'+fl+(r.level?' — <span class="hint">'+E(r.level)+' (تقريبي)</span>':'')+' <button class="spk" data-sp="1">🔊</button></div>';
+    if(st(r.freq))h+='<div>⭐ <span dir="ltr">'+st(r.freq)+'</span></div>';
+    if(r.vtype)h+='<div class="hint">'+E(r.vtype)+'</div>';
+    if(r.ipa)h+='<div dir="ltr">🔊 IPA: /'+E(String(r.ipa).replace(/\//g,""))+'/</div>';
+    if(r.arpron)h+='<div>🗣️ تقريبًا بالعربية: '+E(r.arpron)+'</div>';
+    var ms=(r.meanings||[]).slice(0,3),vv=vfFrom(r.conj);
+    h+='<div class="bigtr">'+E(ms.map(function(m){return m.ar}).filter(Boolean).join("، ")||r.ar)+'</div><div class="en">'+E(ms.map(function(m){return m.en}).filter(Boolean).join(" / ")||r.en)+'</div>'+(vv?vf(vv):"");
+    h+='</div>';
+    h+=S("🔊 المعاني",T(["الكلمة","النوع","🇸🇦 العربية","🇬🇧 English"],(r.meanings||[]).map(function(m){return [N(m.nl),E(m.type),E(m.ar),N(m.en)]})));
+    h+=S("🔄 التصريف",conjT(r.conj));
+    if(r.noun)h+=S("🔢 الجمع والتصغير",T(["المفرد","الجمع","التصغير"],[[N(r.noun.sg),N(r.noun.pl),N(r.noun.dim)]]));
+    h+=S("↔️ المرادفات والأضداد",T(["النوع","الكلمة","🇸🇦 العربية","🇬🇧 English","الشيوع","النطق"],(r.synonyms||[]).map(function(x){return [E(x.kind),N(x.nl),E(x.ar),N(x.en),'<span dir="ltr">'+st(x.freq)+'</span>',N(x.ipa)]})));
+    h+=S("🧬 عائلة الكلمة",T(["الكلمة","النوع","🇸🇦 المعنى","🇬🇧 English","النطق"],(r.family||[]).map(function(x){return [N(x.nl),E(x.type),E(x.ar),N(x.en),N(x.ipa)]})));
+    h+=S("🧩 المفردات المرتبطة",T(["الكلمة","🇸🇦 العربية","🇬🇧 English","النطق"],(r.related||[]).map(function(x){return [N(x.nl),E(x.ar),N(x.en),N(x.ipa)]})));
+    h+=S("🔗 حروف الجر والتراكيب",T(["التركيب","الاستخدام","المثال"],(r.constructions||[]).map(function(x){return [N(x.form),E(x.use),N(x.nl)+'<br>'+E(x.ar)+'<br>'+N(x.en)]})));
+    h+=S("💬 أمثلة",exT(r.examples));
+    if(r.note)h+='<div class="item">📌 '+E(r.note)+'</div>';
+    if(r.mistakes&&r.mistakes.length)h+=S("⚠️ الأخطاء الشائعة","<ul>"+[].concat(r.mistakes).map(function(m){return "<li>"+E(m)+"</li>"}).join("")+"</ul>");
+    if(r.nl)h+=setSel();
+  }
+  document.getElementById("res").innerHTML=h||'<div class="item">لم أجد نتيجة موثوقة.</div>';
+}
+var LANG="nl";
+function search(){
+  var LG=[["nl","🇧🇪 الهولندية"],["en","🇬🇧 English"],["ar","🇸🇦 العربية"]];
+  var M=[["auto",LANG=="nl"?"📖 شرح":"🔁 ترجمة"],["tr","ترجمة فقط"]].concat(LANG=="nl"?[["cj","تصريف فقط"],["cmp","مقارنة"]]:[]);
+  var ph=LANG=="ar"?"اكتب كلمة أو جملة بالعربية":LANG=="en"?"Type an English word or sentence":MODE=="cmp"?"كلمتان أو جملتان مفصولتان بـ | مثل: kennen | weten":"كلمة أو جملة هولندية";
+  var tg=LANG=="nl"?"العربية والإنجليزية":LANG=="en"?"العربية والهولندية":"الإنجليزية والهولندية";
+  V.innerHTML='<div class="chips"><span class="hint">لغة البحث:</span>'+LG.map(function(l){return '<button class="'+(LANG==l[0]?"on":"")+'" data-l="'+l[0]+'">'+l[1]+'</button>'}).join("")+'</div><div class="hint" style="margin-bottom:8px">الترجمة إلى: '+tg+'</div><div class="chips">'+M.map(function(m){return '<button class="'+(MODE==m[0]?"on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><input id="sq" placeholder="'+ph+'" dir="auto"><div class="row"><button class="on" data-go="1">'+(busy?"جارٍ البحث…":"ابحث")+'</button></div><div id="res"></div>'+(HASC?"":gset());
+  var i=document.getElementById("sq");i.value=Q;i.onkeydown=function(e){if(e.key=="Enter")doSearch()};
+  if(R)show(R);
+}
+function gate(r){if(r&&r.valid===false&&r.kind!="nf")return{kind:"nf",detected:(r.inlang&&r.inlang!="unknown")?r.inlang:(r.detected||""),suggestions:r.suggestions||[],other:r.other};return r}
+async function doSearch(){
+  var i=document.getElementById("sq"),q=i&&i.value.trim();if(!q||busy)return;Q=q;
+  var hasAr=/[\u0600-\u06FF]/.test(q),hasLat=/[A-Za-z]/.test(q);
+  if(hasAr&&!hasLat&&LANG!="ar"){LANG="ar";MODE=(MODE=="cj"||MODE=="cmp")?"auto":MODE;R=null;search()}
+  var res=document.getElementById("res");
+  if(LANG=="ar"&&hasLat&&!hasAr){res.innerHTML='<div class="item" style="border-color:var(--bad)">⚠️ كتبتَ بحروف لاتينية واللغة المختارة هي العربية. اختر لغة الكلمة:<div class="row"><button class="ok" data-a="sw" data-v="nl">🇧🇪 هولندية</button><button class="ok" data-a="sw" data-v="en">🇬🇧 English</button></div></div>';return}
+  var sample=null;
+  if(HASC){try{sample=await claude.use("sample")}catch(e){}
+    if(!sample){res.innerHTML='<div class="item">القاموس يعمل فقط عند فتح الصفحة من claude.ai وتسجيل الدخول.</div>';return}}
+  else if(!gkey()&&!gqkey()){res.innerHTML='<div class="item">أدخل مفتاح Groq أو Gemini في «⚙️ إعدادات الذكاء الاصطناعي» أسفل الصفحة.</div>';return}
+  busy=true;R=null;res.innerHTML='<div class="item">جارٍ التحضير… قد يستغرق حتى دقيقة.</div>';
+  try{
+    var L=LANG,md=MODE;
+    if(L!="nl"&&(md=="auto"||md=="cj"||md=="cmp"))md="a2n";
+    var pr=SYS+"\n\nMODE="+md+"\nSRC="+L+"\nInput: "+q;
+    R=HASC?await sample.json(pr,{modelTier:"complex"}):await ai(pr);
+    R=gate(R);show(R);
+  }catch(e){res.innerHTML='<div class="item">تعذّر البحث'+(e&&e.message?': '+esc(e.message):'')+'</div>'}
+  busy=false;
+}
+function gkey(){try{return localStorage.getItem("gk")||GK}catch(e){return GK}}
+function gmodel(){try{return localStorage.getItem("gm2")||GM}catch(e){return GM}}
+function gqkey(){try{return localStorage.getItem("gq")||GQ}catch(e){return GQ}}
+function qmodel(){try{return localStorage.getItem("qm")||"openai/gpt-oss-20b"}catch(e){return "openai/gpt-oss-20b"}}
+function aprov(){try{var p=localStorage.getItem("ap");if(p)return p}catch(e){}return gkey()?"gemini":"groq"}
+async function gcall(m,p){
+  var r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(m)+":generateContent",{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":gkey()},body:JSON.stringify({contents:[{parts:[{text:p}]}],generationConfig:{responseMimeType:"application/json"}})});
+  var j={};try{j=await r.json()}catch(e){}
+  return{r:r,j:j};
+}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function gnote(t){var e=document.getElementById("res");if(e&&busy)e.innerHTML='<div class="item">'+t+'</div>'}
+function gparse(x){var t=(((x.j.candidates||[])[0]||{}).content||{parts:[]}).parts.map(function(z){return z.text||""}).join("").replace(/```json|```/g,"").trim();return JSON.parse(t)}
+async function gem(p){
+  var first=gmodel(),cand=[first].concat(["gemini-3.5-flash-lite","gemini-3.1-flash-lite","gemini-3.6-flash","gemini-flash-latest"]),tried={},x=null,listed=false,was404=false,st=0;
+  for(var ci=0;ci<cand.length;ci++){
+    var m=cand[ci];if(tried[m])continue;tried[m]=1;
+    for(var at=0;at<2;at++){
+      x=await gcall(m,p);st=x.r.status;
+      if(x.r.ok){if(was404&&m!=first){try{localStorage.setItem("gm2",m)}catch(e){}}return gparse(x)}
+      if(st==429||st==500||st==503){gnote("النموذج مزدحم الآن، جارٍ إعادة المحاولة…");await sleep(2500*(at+1));continue}
+      if(st==404&&m==first)was404=true;
+      break;
+    }
+    if(ci==cand.length-1&&!listed){
+      listed=true;var l={};
+      try{l=await (await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=100",{headers:{"x-goog-api-key":gkey()}})).json()}catch(e){}
+      (l.models||[]).filter(function(q){return (q.supportedGenerationMethods||[]).indexOf("generateContent")>-1&&/flash/.test(q.name)&&!/(image|tts|live|audio|embed|thinking|exp)/.test(q.name)}).slice(0,3).forEach(function(q){cand.push(q.name.replace("models/",""))});
+    }
+  }
+  if(st==429||st==503||st==500)throw new Error("النموذج مزدحم أو تجاوزتَ الحد المجاني. انتظر دقيقة ثم أعد المحاولة.");
+  throw new Error((x&&x.j&&x.j.error&&x.j.error.message)||("HTTP "+st));
+}
+var GMS=[["gemini-3.5-flash-lite","⚡ الأسرع (موصى به)"],["gemini-3.1-flash-lite","سريع واقتصادي"],["gemini-3.6-flash","متوازن"],["gemini-3.8-flash","الأذكى — أبطأ"],["gemini-flash-latest","أحدث Flash تلقائيًا"]];
+var GQS=[["llama-3.1-8b-instant","⚡ الأسرع غالبًا"],["openai/gpt-oss-20b","سريع وأذكى"],["openai/gpt-oss-120b","الأذكى — أبطأ"],["llama-3.3-70b-versatile","متوازن"]];
+function qlist(){try{var a=JSON.parse(localStorage.getItem("qav")||"null");if(a&&a.length)return a.map(function(id){var k=GQS.filter(function(m){return m[0]==id})[0];return [id,k?k[1]:"متاح لحسابك"]})}catch(e){}return GQS}
+function mopts(L,cu){return L.map(function(m){return '<option value="'+m[0]+'"'+(m[0]==cu?" selected":"")+'>'+m[0]+' — '+m[1]+'</option>'}).join("")}
+function gset(){
+  var cg=gmodel(),cq=qmodel(),ig=GMS.some(function(m){return m[0]==cg}),iq=qlist().some(function(m){return m[0]==cq}),ap=aprov();
+  var sy=window.cloudPush?'<label class="hint"><input type="checkbox" id="gk_sync" style="width:auto;margin:0 4px"'+((function(){try{return localStorage.getItem("gksync")=="1"}catch(e){return false}})()?" checked":"")+'> ☁️ احفظ المفاتيح في حسابي (خاص بك فقط)</label>':"";
+  return '<details class="item"><summary>⚙️ إعدادات الذكاء الاصطناعي</summary><div class="hint">المفاتيح تُحفظ في هذا المتصفح. يُجرَّب المزوّد المختار أولًا، ثم الآخر عند الفشل.</div>'
+  +'<div class="hint" style="margin-top:6px">المزوّد المفضّل</div><select id="ap_s" style="width:100%"><option value="groq"'+(ap=="groq"?" selected":"")+'>⚡ Groq</option><option value="gemini"'+(ap=="gemini"?" selected":"")+'>Google Gemini</option></select>'
+  +'<div class="hint" style="margin-top:10px"><b>Groq</b> — المفتاح من <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--ac)">console.groq.com/keys</a></div><input id="gq_i" type="password" dir="ltr" placeholder="gsk_..." value="'+esc(gqkey())+'"><select id="qm_s" style="width:100%">'+mopts(qlist(),cq)+'</select><input id="qm_i" dir="ltr" placeholder="أو اسم نموذج Groq مخصص (يتقدم على القائمة)" value="'+(iq?"":esc(cq))+'" style="margin-top:8px">'
+  +'<div class="hint" style="margin-top:10px"><b>Google Gemini</b></div><input id="gk_i" type="password" dir="ltr" placeholder="مفتاح Gemini API" value="'+esc(gkey())+'"><select id="gm_s" style="width:100%">'+mopts(GMS,cg)+'</select><input id="gm_i" dir="ltr" placeholder="أو اسم نموذج Gemini مخصص (يتقدم على القائمة)" value="'+(ig?"":esc(cg))+'" style="margin-top:8px">'
+  +sy+'<div class="row" style="margin-top:10px"><button data-a="gbench">⏱ اختبار الكل واختيار الأسرع</button><button class="ok" data-a="gsave">حفظ</button></div><div id="gbo" class="hint"></div><span id="gmsg" class="hint"></span></details>'}
+function asave(){
+  try{
+    localStorage.setItem("gk",$("gk_i").value.trim());localStorage.setItem("gq",$("gq_i").value.trim());
+    localStorage.setItem("gm2",$("gm_i").value.trim()||$("gm_s").value);localStorage.setItem("qm",$("qm_i").value.trim()||$("qm_s").value);
+    localStorage.setItem("ap",$("ap_s").value);
+    if($("gk_sync"))localStorage.setItem("gksync",$("gk_sync").checked?"1":"0");
+  }catch(e){}
+  if(window.cloudPush)window.cloudPush();
+}
+async function qcall(m,p){
+  var b={model:m,messages:[{role:"user",content:p}],response_format:{type:"json_object"}};
+  if(/gpt-oss/.test(m)&&!/safeguard/.test(m))b.reasoning_effort="low";
+  var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+gqkey()},body:JSON.stringify(b)});
+  var j={};try{j=await r.json()}catch(e){}
+  return{r:r,j:j};
+}
+function qparse(x){var t=(((x.j.choices||[])[0]||{}).message||{}).content||"";t=t.replace(/<think>[\s\S]*?<\/think>/g,"").replace(/```json|```/g,"").trim();return JSON.parse(t)}
+async function qem(p){
+  var first=qmodel(),cand=[first].concat(qlist().map(function(m){return m[0]})),tried={},x=null,st=0,was404=false;
+  for(var ci=0;ci<cand.length;ci++){
+    var m=cand[ci];if(tried[m])continue;tried[m]=1;
+    for(var at=0;at<2;at++){
+      x=await qcall(m,p);st=x.r.status;
+      if(x.r.ok){if(was404&&m!=first){try{localStorage.setItem("qm",m)}catch(e){}}return qparse(x)}
+      if(st==404&&m==first)was404=true;
+      if(st==429||st==500||st==503){gnote("النموذج مزدحم الآن، جارٍ إعادة المحاولة…");await sleep(2000*(at+1));continue}
+      break;
+    }
+    if(st==401||st==403)break;
+  }
+  if(st==429||st==503||st==500)throw new Error("Groq مزدحم أو تجاوزتَ الحد. انتظر قليلًا ثم أعد المحاولة.");
+  throw new Error((x&&x.j&&x.j.error&&x.j.error.message)||("HTTP "+st));
+}
+async function ai(p){
+  var order=aprov()=="groq"?["groq","gemini"]:["gemini","groq"],err=null;
+  for(var i=0;i<order.length;i++){var v=order[i];
+    if((v=="gemini"&&!gkey())||(v=="groq"&&!gqkey()))continue;
+    try{return v=="groq"?await qem(p):await gem(p)}catch(e){err=e}
+  }
+  throw err||new Error("أدخل مفتاح Groq أو Gemini في «إعدادات الذكاء الاصطناعي».");
+}
+async function gbench(){
+  var out=$("gbo"),res=[],PR='Return only JSON: {"nl":"huis","ar":"<Arabic translation>","en":"<English translation>","example":{"nl":"<short Dutch sentence>","ar":"<Arabic>","en":"<English>"}}';
+  var jobs=[];
+  if($("gq_i").value.trim()){
+    try{localStorage.setItem("gq",$("gq_i").value.trim())}catch(e){}
+    var ms=[];
+    try{var l=await (await fetch("https://api.groq.com/openai/v1/models",{headers:{"Authorization":"Bearer "+gqkey()}})).json();
+      ms=(l.data||[]).map(function(m){return m.id}).filter(function(id){return !/(whisper|tts|guard|orpheus|embed|compound|allam)/i.test(id)})}catch(e){}
+    if(!ms.length)ms=GQS.map(function(m){return m[0]});
+    var pf=function(x){return /oss|instant|flash|scout|llama/.test(x)?1:0};
+    ms=ms.sort(function(a,b){return pf(b)-pf(a)}).slice(0,8);
+    ms.forEach(function(m){jobs.push({v:"groq",m:m})});
+  }
+  if($("gk_i").value.trim()){
+    try{localStorage.setItem("gk",$("gk_i").value.trim())}catch(e){}
+    GMS.filter(function(m){return !/latest/.test(m[0])}).forEach(function(m){jobs.push({v:"gemini",m:m[0]})});
+  }
+  if(!jobs.length){out.innerHTML="أدخل مفتاح Groq أو Gemini أولًا.";return}
+  function draw(extra){out.innerHTML=res.map(function(r){return (r.ok?"✓ ":"✗ ")+(r.v=="groq"?"Groq":"Gemini")+' <span dir="ltr">'+r.m+'</span> — '+(r.ok?(r.ms/1000).toFixed(1)+" ث":esc(r.err))}).join("<br>")+(extra||"<br>…")}
+  out.innerHTML="جارٍ الاختبار… قد يستغرق دقيقة.";
+  for(var i=0;i<jobs.length;i++){var jb=jobs[i],t=Date.now(),ok=false,er="";
+    try{var x=jb.v=="groq"?await qcall(jb.m,PR):await gcall(jb.m,PR);
+      if(x.r.ok){var o=jb.v=="groq"?qparse(x):gparse(x);ok=!!(o&&o.nl)}else er="HTTP "+x.r.status+((x.j&&x.j.error&&x.j.error.message)?" — "+x.j.error.message.slice(0,60):"")}
+    catch(e){er=(e&&e.message)||"فشل الاتصال"}
+    res.push({v:jb.v,m:jb.m,ok:ok,ms:Date.now()-t,err:er||"استجابة غير صالحة"});draw()}
+  try{var qa=res.filter(function(r){return r.v=="groq"&&r.ok}).sort(function(a,b){return a.ms-b.ms}).map(function(r){return r.m});if(qa.length)localStorage.setItem("qav",JSON.stringify(qa))}catch(e){}
+  var good=res.filter(function(r){return r.ok}).sort(function(a,b){return a.ms-b.ms});
+  if(!good.length){draw("<br>لا نموذج استجاب. تحقق من المفاتيح.");return}
+  var f=good[0];
+  $("ap_s").value=f.v;if(f.v=="groq"){$("qm_s").innerHTML=mopts(qlist(),f.m);$("qm_s").value=f.m;$("qm_i").value=""}else{$("gm_s").value=f.m;$("gm_i").value=""}
+  asave();
+  draw('<br><b>الأسرع عندك: '+(f.v=="groq"?"Groq":"Gemini")+' <span dir="ltr">'+f.m+'</span> — '+(f.ms/1000).toFixed(1)+' ث. تم اعتماده وحفظه.</b>');
+}
+
+function addEntry(e,b){
+  var s=gs($("tgt").value)||MAIN(),stc=$("d_st")&&$("d_st").checked;
+  var dup=s.cards.filter(function(c){return norm(c.nl)==norm(e.nl)})[0];
+  if(dup){if(stc&&!dup.star){dup.star=1;save();b.textContent="✓ موجودة، وأُضيفت إلى كلماتي";return}b.textContent="✓ موجودة بالفعل في «"+s.name+"»";return}
+  var ex=e.ex||{},nc=mk([e.nl,e.article||"",e.type||"",e.ar||"",e.en||"",ex.nl||"",ex.ar||"",ex.en||"",e.note||""]);
+  nc.pa=e.pa||"";nc.pp=e.pp||"";nc.star=stc?1:0;s.cards.push(nc);save();
+  b.textContent="✓ أُضيفت إلى «"+s.name+"»"+(stc?" وإلى كلماتي":"");
+}
+function addWord(){
+  if(!R||!R.nl)return;var m0=(R.meanings||[])[0]||{},v=vfFrom(R.conj)||{};
+  addEntry({nl:R.nl,article:R.article,type:R.type,ar:m0.ar||R.ar,en:m0.en||R.en,ex:(R.examples||[])[0],note:R.vtype,pa:v.pa,pp:v.pp},document.querySelector("[data-a=addw]"));
+}
+function cardById(id){return gs(cur.set).cards.filter(function(c){return c.id==id})[0]}
+function val(i){return $(i).value.trim()}
+document.addEventListener("click",function(e){
+  var el=e.target.closest("[data-a],[data-t],[data-m],[data-go],[data-sp],[data-l]");if(!el)return;
+  var d=el.dataset,a=d.a;
+  if(d.t){tab=d.t;cur={n:"home"};return render()}
+  if(a=="addsave"){AS=$("as").value;var nl=$("a_nl").value.trim(),ar=$("a_ar").value.trim();if(!nl||!ar){cur.am="اكتب الكلمة الهولندية ومعناها بالعربية.";return addTab()}
+    var g=function(i){return $(i).value.trim()};var nc=mk([nl,g("a_art"),$("a_ty").value,ar,g("a_en"),g("a_xn"),g("a_xa"),g("a_xe"),""]);nc.pa=g("a_pa");nc.pp=g("a_pp");nc.star=$("a_st").checked?1:0;gs(AS).cards.push(nc);save();cur.am="✓ أُضيفت «"+nl+"» إلى «"+gs(AS).name+"»";addTab();$("a_nl").focus();return}
+  if(a=="addbulk"){AS=$("as")?$("as").value:AS;var n=parseBulk($("ab").value,gs(AS));save();cur.am="تمت إضافة "+n+" بطاقة إلى «"+gs(AS).name+"»";return addTab()}
+  if(a=="sayr")return speak(R.results[+d.i].nl);
+  if(a=="addr")return addEntry(R.results[+d.i],el);
+  if(a=="full"){Q=R.results[+d.i].nl;MODE="auto";LANG="nl";R=null;search();return doSearch()}
+  if(a=="gbench")return gbench();
+  if(a=="gsave"){asave();$("gmsg").textContent=" تم الحفظ";return}
+  if(a=="tf"){TF=d.v;return setPage()}
+  if(a=="fl"){FL=d.v;return setPage()}
+  if(d.m&&!a){var q0=$("sq");if(q0)Q=q0.value;MODE=d.m;R=null;return search()}
+  if(d.l&&!a){var q1=$("sq");if(q1)Q=q1.value;LANG=d.l;if(LANG!="nl"&&(MODE=="cj"||MODE=="cmp"))MODE="auto";R=null;return search()}
+  if(a=="sw"){var q2=$("sq");if(q2)Q=q2.value;LANG=d.v;if(LANG!="nl"&&(MODE=="cj"||MODE=="cmp"))MODE="auto";R=null;search();return doSearch()}
+  if(a=="sug"){Q=R.suggestions[+d.i].w;R=null;search();return doSearch()}
+  if(d.go&&!a)return doSearch();
+  if(d.sp&&!a)return speak(R.nl);
+  if(a=="say")return e.stopPropagation(),speak(SAY);
+  if(a=="addw")return addWord();
+  if(a=="home"){cur={n:"home"};return render()}
+  if(a=="open"){cur={n:"set",set:d.s};return render()}
+  if(a=="newset"){var n=$("nsn").value.trim();if(n){var s={id:uid(),name:n,cards:[]};DB.sets.push(s);save();cur={n:"set",set:s.id};render()}return}
+  if(a=="io"){cur={n:"io"};return render()}
+  if(a=="srsgo")return start("srs",d.s);
+  if(a=="go")return start(d.m,cur.set);
+  if(a=="dir"){DIR=d.v;return setPage()}
+  if(a=="so"){SO=!SO;return setPage()}
+  if(a=="flip"){cur.flip=!cur.flip;return render()}
+  if(a=="star"){e.stopPropagation();var c=cardById(d.c)||cur.q&&cur.q.filter(function(x){return x.id==d.c})[0];if(c){c.star=c.star?0:1;save();render()}return}
+  if(a=="rate"){var c=cur.q.shift();rate(c,+d.q);if(+d.q==0)cur.q.push(c);cur.flip=false;cur.d=dirOf();return srs()}
+  if(a=="next"){cur.i=Math.min(cur.i+1,cur.q.length);cur.flip=false;cur.res=undefined;if(cur.n=="mc"&&cur.i<cur.q.length)mkq();cur.d=cur.n=="mc"?cur.d:dirOf();if(cur.n=="browse"&&cur.i>=cur.q.length)cur.i=0;return render()}
+  if(a=="prev"){cur.i=(cur.i+cur.q.length-1)%cur.q.length;cur.flip=false;return browse()}
+  if(a=="pick"&&cur.ans===null){var c=cur.q[cur.i];cur.ans=+d.i;if(cur.opts[cur.ans]===c){cur.s++;rate(c,2)}else rate(c,0);return mc()}
+  if(a=="check")return typeCheck();
+  if(a=="skip")return typeCheck(true);
+  if(a=="tile"){var i=+d.i,t=cur.tiles[i];if(cur.ok[t.k]||cur.bad)return;
+    if(cur.sel===null){cur.sel=i}else if(cur.sel==i){cur.sel=null}else{var u=cur.tiles[cur.sel];
+      if(u.k==t.k&&u.t!=t.t){cur.ok[t.k]=1;cur.sel=null}else{cur.bad=[cur.sel,i];cur.sel=null;setTimeout(function(){cur.bad=null;if(cur.n=="match")match()},600)}}
+    return match()}
+  if(a=="savecard"){var s=gs(cur.set);if(!val("f_nl")||!val("f_ar"))return;
+    var f={nl:val("f_nl"),art:val("f_art"),ar:val("f_ar"),en:val("f_en"),xn:val("f_xn"),xa:val("f_xa"),xe:val("f_xe"),ty:$("f_ty").value,pa:val("f_pa"),pp:val("f_pp")};
+    if(cur.ed){var cc=cardById(cur.ed);Object.assign(cc,f);var ns=gs($("f_gp").value),os=homeSet(cc);if(ns&&os&&ns!==os){os.cards=os.cards.filter(function(x){return x!==cc});ns.cards.push(cc)}cur.ed=null}else s.cards.push(Object.assign(mk([f.nl,f.art,"",f.ar,f.en,f.xn,f.xa,f.xe]),f));
+    save();cur.msg=null;return setPage()}
+  if(a=="edit"){cur.ed=d.c;setPage();window.scrollTo(0,0);return}
+  if(a=="toadd"){AS=cur.set=="__mine"?MAIN().id:cur.set;tab="add";return render()}
+  if(a=="canc"){cur.ed=null;return setPage()}
+  if(a=="del"){if(cur.dc==d.c){DB.sets.forEach(function(x){x.cards=x.cards.filter(function(c){return c.id!=d.c})});cur.dc=null;save()}else cur.dc=d.c;return setPage()}
+  if(a=="bulk"){var s=gs(cur.set),n=0;$("bulk").value.split(/\r?\n/).forEach(function(l){var p=l.split(/[;\t]/).map(function(x){return x.trim()});if(p.length<2||!p[0]||!p[1])return;var m=p[0].match(/^(de|het)\s+(.+)/i);s.cards.push(mk([m?m[2]:p[0],m?m[1].toLowerCase():"","",p[1],p[2]||"","","","",""]));n++});save();cur.msg="تمت إضافة "+n+" بطاقة";return setPage()}
+  if(a=="rename"){var n=val("rn");if(n){gs(cur.set).name=n;save()}return setPage()}
+  if(a=="delset"){if(cur.ds){DB.sets=DB.sets.filter(function(s){return s.id!=cur.set});save();cur={n:"home"}}else cur.ds=1;return render()}
+  if(a=="reset"){if(cur.rs){gs(cur.set).cards.forEach(function(c){c.box=0;c.due=0});save();cur.rs=0;cur.msg="تم تصفير التقدّم"}else cur.rs=1;return setPage()}
+  if(a=="restore"){if(!cur.rs){cur.rs=1;return ioPage()}try{var x=JSON.parse($("imp").value);if(!x.sets)throw 0;DB=x;migrate();save();cur={n:"home"};render()}catch(err){cur.rs=0;ioPage();$("iom").textContent="النص غير صالح."}return}
+});
+render();
+</script>
+</body>
+</html>
