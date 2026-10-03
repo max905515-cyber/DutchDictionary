@@ -356,8 +356,11 @@ function search(){
   var M=[["auto",LANG=="nl"?"📖 شرح":"🔁 ترجمة"],["tr","ترجمة فقط"]].concat(LANG=="nl"?[["cj","تصريف فقط"],["cmp","مقارنة"]]:[]);
   var ph=LANG=="ar"?"اكتب كلمة أو جملة بالعربية":LANG=="en"?"Type an English word or sentence":MODE=="cmp"?"كلمتان أو جملتان مفصولتان بـ | مثل: kennen | weten":"كلمة أو جملة هولندية";
   var tg=LANG=="nl"?"العربية والإنجليزية":LANG=="en"?"العربية والهولندية":"الإنجليزية والهولندية";
-  V.innerHTML='<div class="chips"><span class="hint">لغة البحث:</span>'+LG.map(function(l){return '<button class="'+(LANG==l[0]?"on":"")+'" data-l="'+l[0]+'">'+l[1]+'</button>'}).join("")+'</div><div class="hint" style="margin-bottom:8px">الترجمة إلى: '+tg+'</div><div class="chips">'+M.map(function(m){return '<button class="'+(MODE==m[0]?"on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><input id="sq" placeholder="'+ph+'" dir="auto"><div class="row"><button class="on" data-go="1">'+(busy?"جارٍ البحث…":"ابحث")+'</button></div><div id="res"></div>'+(HASC?"":gset());
-  var i=document.getElementById("sq");i.value=Q;i.onkeydown=function(e){if(e.key=="Enter")doSearch()};
+  V.innerHTML='<div class="chips"><span class="hint">لغة البحث:</span>'+LG.map(function(l){return '<button class="'+(LANG==l[0]?"on":"")+'" data-l="'+l[0]+'">'+l[1]+'</button>'}).join("")+'</div><div class="hint" style="margin-bottom:8px">الترجمة إلى: '+tg+'</div><div class="chips">'+M.map(function(m){return '<button class="'+(MODE==m[0]?"on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><input id="sq" type="search" enterkeyhint="search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="'+ph+'" dir="auto"><div class="row"><button class="on" data-go="1">'+(busy?"جارٍ البحث…":"ابحث")+'</button></div><div id="res"></div>'+(HASC?"":gset());
+  var i=document.getElementById("sq");i.value=Q;var lastGo=0,fire=function(){var n=Date.now();if(n-lastGo<700||!i.value.trim())return;lastGo=n;try{i.blur()}catch(x){}doSearch()},isEnter=function(e){return e.key=="Enter"||e.keyCode==13||e.which==13};
+  i.onkeydown=function(e){if(isEnter(e)){e.preventDefault();fire()}};
+  i.onkeyup=function(e){if(isEnter(e))fire()};
+  i.onsearch=fire;
   if(R)show(R);
 }
 function gate(r){if(r&&r.valid===false&&r.kind!="nf")return{kind:"nf",detected:(r.inlang&&r.inlang!="unknown")?r.inlang:(r.detected||""),suggestions:r.suggestions||[],other:r.other};return r}
