@@ -108,7 +108,8 @@ details{margin:8px 0}
 ];
 
 var HASC=!!(window.claude&&window.claude.use);
-var GK="",GM="gemini-3.5-flash-lite";
+var GK="AQ.Ab8RN6LUevJxR4aKLI1hELZPApWv2ajvWV7gD_8tRZbgLnbHMA",GM="gemini-3.5-flash-lite";
+var GQ="";
 var DB=null,tab="dict",cur={n:"home"},DIR="nl",SO=false,SAY="",MODE="auto",R=null,busy=false,Q="";
 var IV=[0,1,2,4,8,16,32];
 var V=document.getElementById("view");
@@ -284,6 +285,9 @@ function setSel(nb){return '<div class="row"><select id="tgt">'+DB.sets.map(func
 var R=null,busy=false,MODE="auto",Q="";
 var SYS="You are a specialist dictionary and tutor for BELGIAN Dutch (Flanders usage is the primary reference) for Arabic speakers. Mention Netherlands Dutch only when the difference matters and is certain. NEVER guess or invent meanings, forms, IPA, CEFR levels, frequency or regional facts: if unsure, use empty string/array/null. CEFR is approximate. freq is an integer 1-5 only if well-founded, else 0. Never call it a separate 'Flemish language'. Verbs: say whether separable (scheidbaar), inseparable or irregular only if sure; give hebben/zijn. All explanations in Arabic; examples in natural Belgian Dutch, every Dutch example with Arabic AND English translation. If the input has a spelling/grammar error, put the corrected form in 'correction' and use only the correct form afterwards. Reply with ONLY one JSON object, no markdown. Choose 'kind' by MODE and input: MODE=tr -> {\"kind\":\"tr\",\"ar\":\"\",\"en\":\"\"} (translation only). MODE=cj -> {\"kind\":\"cj\",\"nl\":\"\",\"conj\":CONJ}. MODE=cmp -> input is two items separated by | : {\"kind\":\"cmp\",\"items\":[ITEM,ITEM],\"diff\":\"short Arabic key difference\",\"regional\":{\"be\":{\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"use\":\"\",\"freq\":\"\",\"ex\":EX},\"nl\":{same}}|null}. MODE=auto: a single word/phrase -> {\"kind\":\"word\",\"correction\":\"\",\"nl\":\"\",\"article\":\"de|het|\",\"type\":\"Arabic grammatical type\",\"vtype\":\"\",\"level\":\"\",\"freq\":0,\"ipa\":\"\",\"arpron\":\"approx Arabic pronunciation\",\"region\":\"BE|NL|\",\"meanings\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\"}],\"conj\":CONJ|null,\"noun\":{\"sg\":\"\",\"pl\":\"\",\"dim\":\"\"}|null,\"synonyms\":[{\"kind\":\"مرادف|ضد\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"freq\":0,\"ipa\":\"\"}],\"family\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\"}] (only true derivations),\"related\":[5-7 common related words {\"nl\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\"}],\"constructions\":[{\"form\":\"fixed preposition/pattern\",\"use\":\"\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}],\"examples\":[EX x3],\"note\":\"\",\"mistakes\":[\"\"]}; a sentence or text -> {\"kind\":\"text\",\"correction\":\"\",\"ar\":\"\",\"en\":\"\",\"vocab\":[{\"nl\":\"\",\"type\":\"\",\"ar\":\"\",\"en\":\"\",\"level\":\"\",\"forms\":\"\"}],\"idioms\":[{\"nl\":\"\",\"ar\":\"\",\"use\":\"\",\"ex\":EX}],\"grammar\":[{\"rule\":\"\",\"why\":\"\",\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}],\"summary\":\"\"}. EX={\"nl\":\"\",\"ar\":\"\",\"en\":\"\"}. CONJ={\"aux\":\"hebben|zijn\",\"rows\":[{\"pron\":\"ik\",\"present\":\"\",\"past\":\"\",\"perfect\":\"\",\"imperative\":\"\"}] (merge pronouns with identical forms: ik; jij/je/u; hij/zij/het; wij/we; jullie; zij/ze),\"pres_part\":\"\",\"past_part\":\"\"}. ITEM={\"nl\":\"\",\"type\":\"\",\"article\":\"\",\"ar\":\"\",\"en\":\"\",\"ipa\":\"\",\"meaning\":\"\",\"use\":\"\",\"formality\":\"\",\"freq\":\"\",\"level\":\"\",\"ex\":EX}.";
 SYS+=' MODE=a2n -> the input is ARABIC or English: give the 3-5 most natural Belgian Dutch equivalents ranked by naturalness in Belgium: {"kind":"a2n","results":[{"nl":"","article":"de|het|","type":"Arabic grammatical type","region":"BE|NL|","ipa":"","ar":"","en":"","note":"short Arabic note on usage and the difference between the options","pa":"verbs only: simple past e.g. at / aten","pp":"verbs only: perfect e.g. heeft gegeten","ex":EX}],"tip":""}. If the input is a full sentence return one result whose nl is the Dutch translation (type: جملة, no article). Never invent; return fewer results if unsure.';
+SYS+=' SRC states the input language (nl, ar or en); always translate into the other two languages. For MODE=a2n set "src" at the top level to the input language and give BOTH ar and en for every Dutch equivalent (ar = Arabic translation of that Dutch word, en = English translation of that Dutch word). For MODE=tr return {"kind":"tr","nl":"","ar":"","en":""} with all three filled (the source language is the input itself; fix obvious typos).';
+SYS+=' STRICT LANGUAGE RULE: treat the input ONLY as the SRC language, even when the same spelling is also a word in another language (for example English "kind" is not Dutch "kind", Dutch "ramp" is not English "ramp"). If the input has one obvious typo, fix it (put the fixed form in "correction") and answer for the fixed form. If it is not a valid word or phrase of SRC and has no single obvious fix (nonexistent word, a word of another language, or too ambiguous), do NOT guess: return {"kind":"nf","detected":"nl|en|ar|","suggestions":[up to 6 real words of the SRC language that are spelled similarly or are the most likely intended words: {"w":"","ar":"","en":"","note":"very short Arabic note"}]}, where detected is the language the input really looks like (empty if unknown). Suggestions must be real words in SRC only.';
+SYS+=' GATE: every response of any kind MUST include the fields "inlang" (the language the input really is: nl, en, ar or unknown) and "valid" (true only if the input is a real word or phrase in SRC). If valid is false return kind nf and NEVER explain the input as if it belonged to SRC. Never invent regional or dialect claims and never mention other countries or languages (Dutch in Belgium is not Austrian German); state a regional difference only when you are certain. For nf also include "other":{"lang":"nl|en|ar","ar":"","en":"","note":""} giving the meaning of the input in the language it really belongs to (omit when unknown). When valid is true but the same spelling is also a real word with a different meaning in the other of nl/en, add "homograph":{"lang":"nl|en","ar":"","en":""}.';
 function E(x){return esc(x==null?"":String(x))}
 function N(x){return '<span dir="ltr">'+E(x)+'</span>'}
 function T(h,rows){rows=rows.filter(function(r){return r.some(function(c){return c})});return rows.length?'<div class="tw"><table><tr>'+h.map(function(x){return '<th>'+x+'</th>'}).join("")+'</tr>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>'}).join("")+'</tr>'}).join("")+'</table></div>':""}
@@ -295,9 +299,15 @@ function conjT(c){if(!c||!c.rows||!c.rows.length)return "";
 function show(r){
   var h="",k=r.kind;
   if(r.correction)h+='<div class="item" style="border-color:var(--bad)">⚠️ الصياغة الصحيحة: <b dir="ltr">'+E(r.correction)+'</b></div>';
-  if(k=="tr")h+='<div class="item"><div class="bigtr">'+E(r.ar)+'</div><div class="en" style="font-size:1.2rem">🇬🇧 '+E(r.en)+'</div></div>';
+  if(k!="nf"&&r.homograph&&(r.homograph.ar||r.homograph.en))h+='<div class="item" style="border-color:var(--ac)">⚠️ انتبه: الكتابة نفسها كلمة في اللغة '+({nl:"الهولندية",en:"الإنجليزية"}[r.homograph.lang]||"أخرى")+' بمعنى مختلف: <b dir="auto">'+E([r.homograph.ar,r.homograph.en].filter(Boolean).join(" · "))+'</b></div>';
+  if(k=="tr")h+='<div class="item">'+(r.nl?'<div class="bigtr" dir="ltr">🇧🇪 '+E(r.nl)+'</div>':'')+'<div class="bigtr">🇸🇦 '+E(r.ar)+'</div><div class="bigtr" dir="ltr" style="font-size:1.5rem">🇬🇧 '+E(r.en)+'</div></div>';
+  else if(k=="nf"){
+    var LN={nl:"الهولندية",en:"الإنجليزية",ar:"العربية"},sg=r.suggestions||[];
+    h+='<div class="item" style="border-color:var(--bad)">⚠️ لم أجد «<b dir="auto">'+E(Q)+'</b>» ككلمة صحيحة في اللغة <b>'+LN[LANG]+'</b>.'+(r.detected&&r.detected!=LANG&&LN[r.detected]?'<div style="margin-top:6px">تبدو كلمة <b>'+LN[r.detected]+'</b>'+(r.other&&(r.other.ar||r.other.en)?' ومعناها: <b dir="auto">'+E([r.other.ar,r.other.en].filter(Boolean).join(" · "))+'</b>':'')+'.'+(r.other&&r.other.note?' <span class="hint">'+E(r.other.note)+'</span>':'')+'</div><div class="row"><button class="ok" data-a="sw" data-v="'+E(r.detected)+'">بدّل اللغة إلى '+LN[r.detected]+' وابحث</button></div>':'')+'</div>';
+    if(sg.length)h+='<div class="item"><b>💡 هل تقصد:</b>'+sg.map(function(x,i){return '<div style="border-top:1px solid var(--bd);padding:8px 0;display:flex;gap:8px;align-items:center"><button data-a="sug" data-i="'+i+'" style="flex:0 0 auto" dir="auto">'+E(x.w)+'</button><div style="flex:1">'+E([x.ar,x.en].filter(Boolean).join(" · "))+(x.note?'<div class="hint">'+E(x.note)+'</div>':'')+'</div></div>'}).join("")+'</div>';
+  }
   else if(k=="a2n"){
-    h+=(r.results||[]).map(function(x,i){return '<div class="item"><div>'+(x.article?'<span class="art">'+E(x.article)+'</span> ':'')+'<span class="nl" style="font-size:1.6rem">'+E(x.nl)+'</span> <button class="spk" data-a="sayr" data-i="'+i+'">🔊</button></div><div class="hint">'+E([x.type,x.region].filter(Boolean).join(" · "))+(x.ipa?' · <span dir="ltr">/'+E(String(x.ipa).replace(/\//g,""))+'/</span>':'')+'</div><div class="bigtr">'+E(x.ar)+'</div><div class="en">'+E(x.en)+'</div>'+vf(x)+(x.note?'<div class="hint">📌 '+E(x.note)+'</div>':'')+(x.ex?exT([x.ex]):'')+'<div class="row"><button data-a="full" data-i="'+i+'">📖 شرح كامل</button><button class="ok" data-a="addr" data-i="'+i+'">➕ أضف</button></div></div>'}).join("");
+    h+=(r.results||[]).map(function(x,i){return '<div class="item"><div>'+(x.article?'<span class="art">'+E(x.article)+'</span> ':'')+'<span class="nl" style="font-size:1.6rem">'+E(x.nl)+'</span> <button class="spk" data-a="sayr" data-i="'+i+'">🔊</button></div><div class="hint">'+E([x.type,x.region].filter(Boolean).join(" · "))+(x.ipa?' · <span dir="ltr">/'+E(String(x.ipa).replace(/\//g,""))+'/</span>':'')+'</div>'+(r.src=="en"?'<div class="bigtr">'+E(x.ar)+'</div><div class="en">'+E(x.en)+'</div>':'<div class="bigtr" dir="ltr">'+E(x.en)+'</div><div>'+E(x.ar)+'</div>')+vf(x)+(x.note?'<div class="hint">📌 '+E(x.note)+'</div>':'')+(x.ex?exT([x.ex]):'')+'<div class="row"><button data-a="full" data-i="'+i+'">📖 شرح كامل</button><button class="ok" data-a="addr" data-i="'+i+'">➕ أضف</button></div></div>'}).join("");
     if(r.tip)h+='<div class="item">📌 '+E(r.tip)+'</div>';
     h+=setSel(true);
   }
@@ -340,31 +350,42 @@ function show(r){
   }
   document.getElementById("res").innerHTML=h||'<div class="item">لم أجد نتيجة موثوقة.</div>';
 }
+var LANG="nl";
 function search(){
-  var M=[["auto","📖 شرح"],["a2n","🇸🇦 عربي ← هولندي"],["tr","ترجمة فقط"],["cj","تصريف فقط"],["cmp","مقارنة"]];
-  var ph=MODE=="cmp"?"كلمتان أو جملتان مفصولتان بـ | مثل: kennen | weten":MODE=="a2n"?"كلمة بالعربية أو الإنجليزية، مثل: منزل":"كلمة أو جملة هولندية، أو كلمة عربية لمعرفة مقابلها";
-  V.innerHTML='<div class="chips">'+M.map(function(m){return '<button class="'+(MODE==m[0]?"on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><input id="sq" placeholder="'+ph+'" dir="auto"><div class="row"><button class="on" data-go="1">'+(busy?"جارٍ البحث…":"ابحث")+'</button></div><div id="res"></div>'+(HASC?"":gset());
+  var LG=[["nl","🇧🇪 الهولندية"],["en","🇬🇧 English"],["ar","🇸🇦 العربية"]];
+  var M=[["auto",LANG=="nl"?"📖 شرح":"🔁 ترجمة"],["tr","ترجمة فقط"]].concat(LANG=="nl"?[["cj","تصريف فقط"],["cmp","مقارنة"]]:[]);
+  var ph=LANG=="ar"?"اكتب كلمة أو جملة بالعربية":LANG=="en"?"Type an English word or sentence":MODE=="cmp"?"كلمتان أو جملتان مفصولتان بـ | مثل: kennen | weten":"كلمة أو جملة هولندية";
+  var tg=LANG=="nl"?"العربية والإنجليزية":LANG=="en"?"العربية والهولندية":"الإنجليزية والهولندية";
+  V.innerHTML='<div class="chips"><span class="hint">لغة البحث:</span>'+LG.map(function(l){return '<button class="'+(LANG==l[0]?"on":"")+'" data-l="'+l[0]+'">'+l[1]+'</button>'}).join("")+'</div><div class="hint" style="margin-bottom:8px">الترجمة إلى: '+tg+'</div><div class="chips">'+M.map(function(m){return '<button class="'+(MODE==m[0]?"on":"")+'" data-m="'+m[0]+'">'+m[1]+'</button>'}).join("")+'</div><input id="sq" placeholder="'+ph+'" dir="auto"><div class="row"><button class="on" data-go="1">'+(busy?"جارٍ البحث…":"ابحث")+'</button></div><div id="res"></div>'+(HASC?"":gset());
   var i=document.getElementById("sq");i.value=Q;i.onkeydown=function(e){if(e.key=="Enter")doSearch()};
   if(R)show(R);
 }
+function gate(r){if(r&&r.valid===false&&r.kind!="nf")return{kind:"nf",detected:(r.inlang&&r.inlang!="unknown")?r.inlang:(r.detected||""),suggestions:r.suggestions||[],other:r.other};return r}
 async function doSearch(){
   var i=document.getElementById("sq"),q=i&&i.value.trim();if(!q||busy)return;Q=q;
+  var hasAr=/[\u0600-\u06FF]/.test(q),hasLat=/[A-Za-z]/.test(q);
+  if(hasAr&&!hasLat&&LANG!="ar"){LANG="ar";MODE=(MODE=="cj"||MODE=="cmp")?"auto":MODE;R=null;search()}
   var res=document.getElementById("res");
+  if(LANG=="ar"&&hasLat&&!hasAr){res.innerHTML='<div class="item" style="border-color:var(--bad)">⚠️ كتبتَ بحروف لاتينية واللغة المختارة هي العربية. اختر لغة الكلمة:<div class="row"><button class="ok" data-a="sw" data-v="nl">🇧🇪 هولندية</button><button class="ok" data-a="sw" data-v="en">🇬🇧 English</button></div></div>';return}
   var sample=null;
   if(HASC){try{sample=await claude.use("sample")}catch(e){}
     if(!sample){res.innerHTML='<div class="item">القاموس يعمل فقط عند فتح الصفحة من claude.ai وتسجيل الدخول.</div>';return}}
-  else if(!gkey()){res.innerHTML='<div class="item">أدخل مفتاح Gemini في «⚙️ إعدادات Gemini» أسفل الصفحة.</div>';return}
+  else if(!gkey()&&!gqkey()){res.innerHTML='<div class="item">أدخل مفتاح Groq أو Gemini في «⚙️ إعدادات الذكاء الاصطناعي» أسفل الصفحة.</div>';return}
   busy=true;R=null;res.innerHTML='<div class="item">جارٍ التحضير… قد يستغرق حتى دقيقة.</div>';
   try{
-    var md=MODE=="auto"&&/[\u0600-\u06FF]/.test(q)?"a2n":MODE;
-    var pr=SYS+"\n\nMODE="+md+"\nInput: "+q;
-    R=HASC?await sample.json(pr,{modelTier:"complex"}):await gem(pr);
-    show(R);
+    var L=LANG,md=MODE;
+    if(L!="nl"&&(md=="auto"||md=="cj"||md=="cmp"))md="a2n";
+    var pr=SYS+"\n\nMODE="+md+"\nSRC="+L+"\nInput: "+q;
+    R=HASC?await sample.json(pr,{modelTier:"complex"}):await ai(pr);
+    R=gate(R);show(R);
   }catch(e){res.innerHTML='<div class="item">تعذّر البحث'+(e&&e.message?': '+esc(e.message):'')+'</div>'}
   busy=false;
 }
 function gkey(){try{return localStorage.getItem("gk")||GK}catch(e){return GK}}
 function gmodel(){try{return localStorage.getItem("gm2")||GM}catch(e){return GM}}
+function gqkey(){try{return localStorage.getItem("gq")||GQ}catch(e){return GQ}}
+function qmodel(){try{return localStorage.getItem("qm")||"openai/gpt-oss-20b"}catch(e){return "openai/gpt-oss-20b"}}
+function aprov(){try{var p=localStorage.getItem("ap");if(p)return p}catch(e){}return gkey()?"gemini":"groq"}
 async function gcall(m,p){
   var r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(m)+":generateContent",{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":gkey()},body:JSON.stringify({contents:[{parts:[{text:p}]}],generationConfig:{responseMimeType:"application/json"}})});
   var j={};try{j=await r.json()}catch(e){}
@@ -394,17 +415,90 @@ async function gem(p){
   throw new Error((x&&x.j&&x.j.error&&x.j.error.message)||("HTTP "+st));
 }
 var GMS=[["gemini-3.5-flash-lite","⚡ الأسرع (موصى به)"],["gemini-3.1-flash-lite","سريع واقتصادي"],["gemini-3.6-flash","متوازن"],["gemini-3.8-flash","الأذكى — أبطأ"],["gemini-flash-latest","أحدث Flash تلقائيًا"]];
-function gset(){var cu=gmodel(),inl=GMS.some(function(m){return m[0]==cu});
-  return '<details class="item"><summary>⚙️ إعدادات Gemini</summary><div class="hint">المفتاح يُحفظ في هذا المتصفح.</div><input id="gk_i" type="password" dir="ltr" placeholder="مفتاح API" value="'+esc(gkey())+'"><div class="hint" style="margin-top:6px">النموذج</div><select id="gm_s" style="width:100%">'+GMS.map(function(m){return '<option value="'+m[0]+'"'+(m[0]==cu?" selected":"")+'>'+m[0]+' — '+m[1]+'</option>'}).join("")+'</select><input id="gm_i" dir="ltr" placeholder="أو اكتب اسم نموذج مخصصًا (يتقدم على القائمة)" value="'+(inl?"":esc(cu))+'" style="margin-top:8px"><div class="row" style="margin-top:8px"><button data-a="gbench">⏱ قياس السرعة</button><button class="ok" data-a="gsave">حفظ</button></div><div id="gbo" class="hint"></div><span id="gmsg" class="hint"></span></details>'}
+var GQS=[["llama-3.1-8b-instant","⚡ الأسرع غالبًا"],["openai/gpt-oss-20b","سريع وأذكى"],["openai/gpt-oss-120b","الأذكى — أبطأ"],["llama-3.3-70b-versatile","متوازن"]];
+function qlist(){try{var a=JSON.parse(localStorage.getItem("qav")||"null");if(a&&a.length)return a.map(function(id){var k=GQS.filter(function(m){return m[0]==id})[0];return [id,k?k[1]:"متاح لحسابك"]})}catch(e){}return GQS}
+function mopts(L,cu){return L.map(function(m){return '<option value="'+m[0]+'"'+(m[0]==cu?" selected":"")+'>'+m[0]+' — '+m[1]+'</option>'}).join("")}
+function gset(){
+  var cg=gmodel(),cq=qmodel(),ig=GMS.some(function(m){return m[0]==cg}),iq=qlist().some(function(m){return m[0]==cq}),ap=aprov();
+  var sy=window.cloudPush?'<label class="hint"><input type="checkbox" id="gk_sync" style="width:auto;margin:0 4px"'+((function(){try{return localStorage.getItem("gksync")=="1"}catch(e){return false}})()?" checked":"")+'> ☁️ احفظ المفاتيح في حسابي (خاص بك فقط)</label>':"";
+  return '<details class="item"><summary>⚙️ إعدادات الذكاء الاصطناعي</summary><div class="hint">المفاتيح تُحفظ في هذا المتصفح. يُجرَّب المزوّد المختار أولًا، ثم الآخر عند الفشل.</div>'
+  +'<div class="hint" style="margin-top:6px">المزوّد المفضّل</div><select id="ap_s" style="width:100%"><option value="groq"'+(ap=="groq"?" selected":"")+'>⚡ Groq</option><option value="gemini"'+(ap=="gemini"?" selected":"")+'>Google Gemini</option></select>'
+  +'<div class="hint" style="margin-top:10px"><b>Groq</b> — المفتاح من <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--ac)">console.groq.com/keys</a></div><input id="gq_i" type="password" dir="ltr" placeholder="gsk_..." value="'+esc(gqkey())+'"><select id="qm_s" style="width:100%">'+mopts(qlist(),cq)+'</select><input id="qm_i" dir="ltr" placeholder="أو اسم نموذج Groq مخصص (يتقدم على القائمة)" value="'+(iq?"":esc(cq))+'" style="margin-top:8px">'
+  +'<div class="hint" style="margin-top:10px"><b>Google Gemini</b></div><input id="gk_i" type="password" dir="ltr" placeholder="مفتاح Gemini API" value="'+esc(gkey())+'"><select id="gm_s" style="width:100%">'+mopts(GMS,cg)+'</select><input id="gm_i" dir="ltr" placeholder="أو اسم نموذج Gemini مخصص (يتقدم على القائمة)" value="'+(ig?"":esc(cg))+'" style="margin-top:8px">'
+  +sy+'<div class="row" style="margin-top:10px"><button data-a="gbench">⏱ اختبار الكل واختيار الأسرع</button><button class="ok" data-a="gsave">حفظ</button></div><div id="gbo" class="hint"></div><span id="gmsg" class="hint"></span></details>'}
+function asave(){
+  try{
+    localStorage.setItem("gk",$("gk_i").value.trim());localStorage.setItem("gq",$("gq_i").value.trim());
+    localStorage.setItem("gm2",$("gm_i").value.trim()||$("gm_s").value);localStorage.setItem("qm",$("qm_i").value.trim()||$("qm_s").value);
+    localStorage.setItem("ap",$("ap_s").value);
+    if($("gk_sync"))localStorage.setItem("gksync",$("gk_sync").checked?"1":"0");
+  }catch(e){}
+  if(window.cloudPush)window.cloudPush();
+}
+async function qcall(m,p){
+  var b={model:m,messages:[{role:"user",content:p}],response_format:{type:"json_object"}};
+  if(/gpt-oss/.test(m)&&!/safeguard/.test(m))b.reasoning_effort="low";
+  var r=await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+gqkey()},body:JSON.stringify(b)});
+  var j={};try{j=await r.json()}catch(e){}
+  return{r:r,j:j};
+}
+function qparse(x){var t=(((x.j.choices||[])[0]||{}).message||{}).content||"";t=t.replace(/<think>[\s\S]*?<\/think>/g,"").replace(/```json|```/g,"").trim();return JSON.parse(t)}
+async function qem(p){
+  var first=qmodel(),cand=[first].concat(qlist().map(function(m){return m[0]})),tried={},x=null,st=0,was404=false;
+  for(var ci=0;ci<cand.length;ci++){
+    var m=cand[ci];if(tried[m])continue;tried[m]=1;
+    for(var at=0;at<2;at++){
+      x=await qcall(m,p);st=x.r.status;
+      if(x.r.ok){if(was404&&m!=first){try{localStorage.setItem("qm",m)}catch(e){}}return qparse(x)}
+      if(st==404&&m==first)was404=true;
+      if(st==429||st==500||st==503){gnote("النموذج مزدحم الآن، جارٍ إعادة المحاولة…");await sleep(2000*(at+1));continue}
+      break;
+    }
+    if(st==401||st==403)break;
+  }
+  if(st==429||st==503||st==500)throw new Error("Groq مزدحم أو تجاوزتَ الحد. انتظر قليلًا ثم أعد المحاولة.");
+  throw new Error((x&&x.j&&x.j.error&&x.j.error.message)||("HTTP "+st));
+}
+async function ai(p){
+  var order=aprov()=="groq"?["groq","gemini"]:["gemini","groq"],err=null;
+  for(var i=0;i<order.length;i++){var v=order[i];
+    if((v=="gemini"&&!gkey())||(v=="groq"&&!gqkey()))continue;
+    try{return v=="groq"?await qem(p):await gem(p)}catch(e){err=e}
+  }
+  throw err||new Error("أدخل مفتاح Groq أو Gemini في «إعدادات الذكاء الاصطناعي».");
+}
 async function gbench(){
-  var out=$("gbo"),res=[];out.innerHTML="جارٍ قياس السرعة… قد يستغرق دقيقة.";
-  for(var i=0;i<GMS.length;i++){var m=GMS[i][0];if(/latest/.test(m))continue;var t=Date.now(),x;
-    try{x=await gcall(m,'Return only this JSON: {"ok":1}')}catch(e){x={r:{ok:false,status:0},j:{}}}
-    res.push({m:m,ok:x.r.ok,ms:Date.now()-t,st:x.r.status});
-    out.innerHTML=res.map(function(r){return (r.ok?"✓ ":"✗ ")+'<span dir="ltr">'+r.m+'</span> — '+(r.ok?(r.ms/1000).toFixed(1)+" ث":"HTTP "+r.st)}).join("<br>")+"<br>…"}
-  var ok=res.filter(function(r){return r.ok}).sort(function(a,b){return a.ms-b.ms});
-  out.innerHTML=res.map(function(r){return (r.ok?"✓ ":"✗ ")+'<span dir="ltr">'+r.m+'</span> — '+(r.ok?(r.ms/1000).toFixed(1)+" ث":"HTTP "+r.st)}).join("<br>")+(ok.length?'<br><b>الأسرع عندك الآن: <span dir="ltr">'+ok[0].m+'</span> — اضغط «حفظ» لاعتماده.</b>':'<br>لا نموذج استجاب. تحقق من المفتاح.');
-  if(ok.length){$("gm_s").value=ok[0].m;$("gm_i").value=""}
+  var out=$("gbo"),res=[],PR='Return only JSON: {"nl":"huis","ar":"<Arabic translation>","en":"<English translation>","example":{"nl":"<short Dutch sentence>","ar":"<Arabic>","en":"<English>"}}';
+  var jobs=[];
+  if($("gq_i").value.trim()){
+    try{localStorage.setItem("gq",$("gq_i").value.trim())}catch(e){}
+    var ms=[];
+    try{var l=await (await fetch("https://api.groq.com/openai/v1/models",{headers:{"Authorization":"Bearer "+gqkey()}})).json();
+      ms=(l.data||[]).map(function(m){return m.id}).filter(function(id){return !/(whisper|tts|guard|orpheus|embed|compound|allam)/i.test(id)})}catch(e){}
+    if(!ms.length)ms=GQS.map(function(m){return m[0]});
+    var pf=function(x){return /oss|instant|flash|scout|llama/.test(x)?1:0};
+    ms=ms.sort(function(a,b){return pf(b)-pf(a)}).slice(0,8);
+    ms.forEach(function(m){jobs.push({v:"groq",m:m})});
+  }
+  if($("gk_i").value.trim()){
+    try{localStorage.setItem("gk",$("gk_i").value.trim())}catch(e){}
+    GMS.filter(function(m){return !/latest/.test(m[0])}).forEach(function(m){jobs.push({v:"gemini",m:m[0]})});
+  }
+  if(!jobs.length){out.innerHTML="أدخل مفتاح Groq أو Gemini أولًا.";return}
+  function draw(extra){out.innerHTML=res.map(function(r){return (r.ok?"✓ ":"✗ ")+(r.v=="groq"?"Groq":"Gemini")+' <span dir="ltr">'+r.m+'</span> — '+(r.ok?(r.ms/1000).toFixed(1)+" ث":esc(r.err))}).join("<br>")+(extra||"<br>…")}
+  out.innerHTML="جارٍ الاختبار… قد يستغرق دقيقة.";
+  for(var i=0;i<jobs.length;i++){var jb=jobs[i],t=Date.now(),ok=false,er="";
+    try{var x=jb.v=="groq"?await qcall(jb.m,PR):await gcall(jb.m,PR);
+      if(x.r.ok){var o=jb.v=="groq"?qparse(x):gparse(x);ok=!!(o&&o.nl)}else er="HTTP "+x.r.status+((x.j&&x.j.error&&x.j.error.message)?" — "+x.j.error.message.slice(0,60):"")}
+    catch(e){er=(e&&e.message)||"فشل الاتصال"}
+    res.push({v:jb.v,m:jb.m,ok:ok,ms:Date.now()-t,err:er||"استجابة غير صالحة"});draw()}
+  try{var qa=res.filter(function(r){return r.v=="groq"&&r.ok}).sort(function(a,b){return a.ms-b.ms}).map(function(r){return r.m});if(qa.length)localStorage.setItem("qav",JSON.stringify(qa))}catch(e){}
+  var good=res.filter(function(r){return r.ok}).sort(function(a,b){return a.ms-b.ms});
+  if(!good.length){draw("<br>لا نموذج استجاب. تحقق من المفاتيح.");return}
+  var f=good[0];
+  $("ap_s").value=f.v;if(f.v=="groq"){$("qm_s").innerHTML=mopts(qlist(),f.m);$("qm_s").value=f.m;$("qm_i").value=""}else{$("gm_s").value=f.m;$("gm_i").value=""}
+  asave();
+  draw('<br><b>الأسرع عندك: '+(f.v=="groq"?"Groq":"Gemini")+' <span dir="ltr">'+f.m+'</span> — '+(f.ms/1000).toFixed(1)+' ث. تم اعتماده وحفظه.</b>');
 }
 
 function addEntry(e,b){
@@ -422,7 +516,7 @@ function addWord(){
 function cardById(id){return gs(cur.set).cards.filter(function(c){return c.id==id})[0]}
 function val(i){return $(i).value.trim()}
 document.addEventListener("click",function(e){
-  var el=e.target.closest("[data-a],[data-t],[data-m],[data-go],[data-sp]");if(!el)return;
+  var el=e.target.closest("[data-a],[data-t],[data-m],[data-go],[data-sp],[data-l]");if(!el)return;
   var d=el.dataset,a=d.a;
   if(d.t){tab=d.t;cur={n:"home"};return render()}
   if(a=="addsave"){AS=$("as").value;var nl=$("a_nl").value.trim(),ar=$("a_ar").value.trim();if(!nl||!ar){cur.am="اكتب الكلمة الهولندية ومعناها بالعربية.";return addTab()}
@@ -430,12 +524,15 @@ document.addEventListener("click",function(e){
   if(a=="addbulk"){AS=$("as")?$("as").value:AS;var n=parseBulk($("ab").value,gs(AS));save();cur.am="تمت إضافة "+n+" بطاقة إلى «"+gs(AS).name+"»";return addTab()}
   if(a=="sayr")return speak(R.results[+d.i].nl);
   if(a=="addr")return addEntry(R.results[+d.i],el);
-  if(a=="full"){Q=R.results[+d.i].nl;MODE="auto";R=null;search();return doSearch()}
+  if(a=="full"){Q=R.results[+d.i].nl;MODE="auto";LANG="nl";R=null;search();return doSearch()}
   if(a=="gbench")return gbench();
-  if(a=="gsave"){try{localStorage.setItem("gk",$("gk_i").value.trim());localStorage.setItem("gm2",$("gm_i").value.trim()||$("gm_s").value)}catch(e){}$("gmsg").textContent=" تم الحفظ";return}
+  if(a=="gsave"){asave();$("gmsg").textContent=" تم الحفظ";return}
   if(a=="tf"){TF=d.v;return setPage()}
   if(a=="fl"){FL=d.v;return setPage()}
   if(d.m&&!a){var q0=$("sq");if(q0)Q=q0.value;MODE=d.m;R=null;return search()}
+  if(d.l&&!a){var q1=$("sq");if(q1)Q=q1.value;LANG=d.l;if(LANG!="nl"&&(MODE=="cj"||MODE=="cmp"))MODE="auto";R=null;return search()}
+  if(a=="sw"){var q2=$("sq");if(q2)Q=q2.value;LANG=d.v;if(LANG!="nl"&&(MODE=="cj"||MODE=="cmp"))MODE="auto";R=null;search();return doSearch()}
+  if(a=="sug"){Q=R.suggestions[+d.i].w;R=null;search();return doSearch()}
   if(d.go&&!a)return doSearch();
   if(d.sp&&!a)return speak(R.nl);
   if(a=="say")return e.stopPropagation(),speak(SAY);
